@@ -1,0 +1,12 @@
+{
+  "name": "pubcrawler",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "^3.2.2",
+    "bootstrap": "3",
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.1.0"
+  }
+}

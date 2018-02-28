@@ -1,0 +1,16 @@
+.bundle
+log/*.log
+tmp/**/*
+tmp/*
+!log/.keep
+!tmp/.keep
+*.swp
+.DS_Store
+public/assets
+public/packs
+public/packs-test
+node_modules
+.byebug_history
+
+# Ignore application configuration
+/config/application.yml
