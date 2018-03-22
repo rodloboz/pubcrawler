@@ -15,7 +15,7 @@ pubs = [
   },
   {
     name: "Pensão Amor",
-    address: "Rua Alecrim 19, 1200-014 Lisboa"
+    address: "Rua Alecrim 19, 1200-014 Lisboa",
     district: "Cais do Sodré",
     description: "‘Pensão Amor’ is located in a typical Portuguese 18th-century building. Once a cheap pension with rooms rented by the hour to prostitutes and their clients to enjoy a short moment of love. Along the 5 floors of the building you can admire remake copies of old posters from burlesque shows and peep shows.",
     photo: "http://1.bp.blogspot.com/-hCHWYVVnrec/T_mWBXcsurI/AAAAAAAAA0E/13PvTpEIZIM/s1600/Pensa%CC%83o+Amor+-+Primeira+Sala+Vertical.jpg"
@@ -88,7 +88,7 @@ pubs = [
     address: "Rua Nova do Carvalho 24, 1200-292 Lisboa, Portugal",
     district: "Cais do Sodré",
     description: "As its name implies, Lisbon’s Music Box is one of the city’s live music hotspots, hosting both Portuguese and international artists as well as regular DJ sets. This trendy joint opened in December 2006 and instantly made an impact on the Lisbon nightlife scene. Based in Cais do Sodré, the line up is the very definition of eclectic. Whether you’re into rock, dance, hip-hop or reggae, they’re bound to stage something that appeals to your tastes.",
-    photo:
+    photo: "https://cdn.theculturetrip.com/images/56-3701391-1436440870efbaea1e2b99449bb0109b1a311e8b9c.jpg"
   },
   {
     name: "Topo",

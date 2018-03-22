@@ -16,6 +16,15 @@ $ rails db:create db:migrate db:seed
 
 The seeds include addresses that will be geocoded. In order to take advantage of all of the features, make sure that all of the addresses were properly geocoded.
 
+## Deploying to heroku
+
+If deploying to heroku fails, it might be an issue with the webpacker version and you'll have to manually specify the heroku buildpacks:
+
+```bash
+$ heroku buildpacks:clear
+$ heroku buildpacks:set heroku/nodejs
+$ heroku buildpacks:add heroku/ruby
+```
 
 ## Adding Google Maps
 
