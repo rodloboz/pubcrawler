@@ -68,7 +68,7 @@ pubs = [
     district: "Avenida da Liberdade",
     description: "This quirky yet stylish speakeasy style bar located on Avenida da Liberdade, has something of a New York vibe. Specialising in Prohibition era cocktails as well as later classics, this is a bar that knows its liquid history.",
     photo: "http://4.bp.blogspot.com/-r9utZhIOOc8/VUPInOsaF0I/AAAAAAAAobc/DfDtAbKeCEI/s1600/11210419_10153208382635926_172709855754488902_n.jpg"
-  }
+  },
   {
     name: "Duplex Restaurante & Bar",
     address: "Rua Nova do Carvalho, 58-60, 1200 Lisbon, Portugal",
