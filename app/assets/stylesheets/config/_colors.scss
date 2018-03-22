@@ -1,6 +1,23 @@
 // Define variables for your color scheme
 $brand-color: #D23333;
 $accent-color: purple;
+$accent-color: $brand-color;
+$border-color: #DBDBDB;
+$light-bg: #ECECEC;
+
+// Text
+$text-dark: #545454;
+$text-grey: #484848;
+$text-light: #A6A6A8;
+
+$body-bg:                 white;
+$body-bg-grey:            #ecf0f1;
+$font-size-base:          $base-size;
+$line-height-base:        $base-height;
+// $headings-font-family:    $header-font;
+$border-color:            #E6E6E6;
+
+
 
 // For example:
 $red: #EE5F5B;

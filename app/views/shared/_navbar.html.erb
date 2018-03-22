@@ -6,22 +6,33 @@
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
-    <%= link_to 'New Pub', new_pub_path, class: "navbar-wagon-item navbar-wagon-link", remote: true %>
     <%= link_to 'Pubs', pubs_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <a href="" class="navbar-wagon-item navbar-wagon-link">Crawls</a>
     <a href="" class="navbar-wagon-item navbar-wagon-link">Messages</a>
+
+    <% if user_signed_in? %>
 
     <!-- Profile picture with dropdown list -->
     <div class="navbar-wagon-item">
       <div class="dropdown">
         <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
         <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-          <li><a href="#">Profile</a></li>
+          <li>
+            <%= link_to 'New Pub', new_pub_path, class: "navbar-wagon-item navbar-wagon-link", remote: true %>
+          </li>
           <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Log Out</a></li>
+          <li>
+            <%= link_to destroy_user_session_path, method: :delete do %>
+              <%= t(".sign_out", default: "Log out") %>
+            <% end %>
+          </li>
         </ul>
       </div>
     </div>
+    <% else %>
+      <%= link_to "Sign Up", new_user_registration_path, {class: "navbar-wagon-item navbar-wagon-link"} %>
+      <%= link_to "Log In", new_user_session_path, {class: "navbar-wagon-item navbar-wagon-link"} %>
+    <% end %>
   </div>
 
   <!-- Dropdown appearing on mobile only -->

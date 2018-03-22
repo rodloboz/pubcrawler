@@ -1,5 +1,5 @@
 class PubsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_pub, only: [:show, :edit, :update, :destroy]
   layout "search", only: [:index]
 

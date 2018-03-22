@@ -7,23 +7,21 @@
         <span class="month"><%= pub.created_at.strftime("%b") %></span>
         <span class="year"><%= pub.created_at.strftime("%Y") %></span>
       </div>
-      <ul class="menu-content">
-        <li>
-          <a href="#">
-            <%= icon("far", "bookmark") %>
-          </a>
-        </li>
-        <li>
-          <% if current_user %>
+      <% if current_user %>
+        <ul class="menu-content">
+          <li>
+            <a href="#">
+              <%= icon("far", "bookmark") %>
+            </a>
+          </li>
+          <li>
             <%= icon(current_user.likes?(pub) ? "fas" : "far" , "heart") %>
-          <% else %>
-            <%= icon("far", "heart") %>
-          <% end %>
-        <li>
-          <a href="#">
-            <%= icon("far", "comment") %>
-          </a>
-      </ul>
+          <li>
+            <a href="#">
+              <%= icon("far", "comment") %>
+            </a>
+        </ul>
+      <% end %>
     </div>
     <div class="data">
       <div class="content">

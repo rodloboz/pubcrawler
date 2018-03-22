@@ -1,0 +1,119 @@
+.signup-wrapper {
+  max-width: 410px;
+  padding: 10px 20px 20px 20px;
+  text-align: center;
+  margin-top: 50px !important;
+  margin: 0 auto;
+  background: #FFF;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.authentication-body {
+  background: $body-bg-grey;
+}
+
+.reset-password-instructions {
+  color: $text-grey;
+  font-size: 15px;
+}
+
+.social-media-authentication {
+  color: $text-grey;
+  font-size: 15px;
+  a {
+    text-decoration: none;
+    color: #FFF;
+  }
+  p {
+    margin-top: 10px;
+  }
+}
+
+.social-media-button {
+  font-size: 19px;
+  height: 38px;
+  vertical-align: middle;
+  display: inline-block;
+  margin: 0 4px;
+  transition: opacity 0.3s ease;
+  @include hover-state {
+    opacity: 0.8;
+  }
+}
+
+.google-red {
+  background: #DD4D41;
+}
+
+.linkedin-blue {
+  background: #0072AA;
+}
+
+.facebook-blue {
+  background: #4C6CA6;
+}
+
+.gitbub-grey {
+  background: #24292E;
+}
+
+#forgot-password {
+  text-align: left;
+  margin-bottom: 10px;
+  a {
+    color: $brand-color;
+    font-size: 15px;
+  }
+}
+
+#return-to-login {
+  color: $brand-color;
+  flex: 1 1 auto;
+  margin-bottom: 0px;
+  line-height: 44px;
+  font-size: 15px;
+}
+
+.signup-login-switch {
+  display: flex;
+  justify-content: flext-start;
+  text-align: left;
+  p {
+    flex: 1 1 auto;
+    margin-bottom: 0px;
+    line-height: 44px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+}
+
+// Style simple_form labels
+.simple_form {
+  text-align: left;
+  label {
+    font-size: 15px;
+  }
+}
+
+#authentication-brand:hover {
+  text-decoration: none;
+}
+
+.authentication-band-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.authentication-brand-logo-img {
+  height: 64px;
+}
+
+.authentication-brand-text {
+  color: $text-dark;
+  font-family: $brand-font;
+  font-weight: semibold;
+  font-size: 30px;
+  line-height: 64px;
+}

@@ -1,0 +1,21 @@
+<%= link_to root_path, id:"authentication-brand" do %>
+  <%= image_tag "logo.png", class: "authentication-brand-logo-img" %>
+<% end %>
+
+<h2>Reset password</h2>
+<p class="reset-password-instructions">Enter the email address associated with your account, and we’ll email you a link to reset your password.</p>
+
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: false %>
+  </div>
+
+  <div class="signup-login-switch">
+    <%= link_to "Return to Login", new_session_path(resource_name), id: "return-to-login" %>
+    <div class="form-actions">
+      <%= f.button :submit, "Send reset link", class: "btn btn-loboz btn-reset-password" %>
+    </div>
+  </div>
+<% end %>
