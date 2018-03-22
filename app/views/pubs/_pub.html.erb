@@ -14,7 +14,11 @@
           </a>
         </li>
         <li>
-          <%= icon(current_user.likes?(pub) ? "fas" : "far" , "heart") %>
+          <% if current_user %>
+            <%= icon(current_user.likes?(pub) ? "fas" : "far" , "heart") %>
+          <% else %>
+            <%= icon("far", "heart") %>
+          <% end %>
         <li>
           <a href="#">
             <%= icon("far", "comment") %>
