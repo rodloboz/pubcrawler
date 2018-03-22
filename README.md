@@ -179,7 +179,7 @@ And finally setup the frontend with the logic to determine which lass should be 
 <li>
   <%= icon(current_user.likes?(pub) ? "fas" : "far" , "heart") %>
 <li>
-```
+``
 
 
 

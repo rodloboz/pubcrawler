@@ -13,7 +13,7 @@
     <%= render 'shared/navbar' %>
     <%= yield %>
     <%= render 'shared/modal' %>
-    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}"%>
     <%= javascript_pack_tag 'application' %>
   </body>
 </html>
