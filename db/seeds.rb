@@ -38,7 +38,7 @@ pubs = [
     name: "Procópio bar",
     address: "Alto de São Francisco 21, 1250-228 Lisboa",
     district: "Rato",
-    description: "Entering this bar is stepping back a century to the early beginning of the 20th century. It’s modeled after French bistrots and this curious Art Nouveaux décor is the elder brother of Parodia, Foxtrot and Pavilhão Chinês Lisbon pubs."
+    description: "Entering this bar is stepping back a century to the early beginning of the 20th century. It’s modeled after French bistrots and this curious Art Nouveaux décor is the elder brother of Parodia, Foxtrot and Pavilhão Chinês Lisbon pubs.",
     photo: "https://www.evasoes.pt/files/2017/04/STV7744.jpg"
   },
   {
