@@ -173,6 +173,14 @@ const toggleIcons = function() {
 export { toggleIcons };
 ```
 
+And finally setup the frontend with the logic to determine which lass should be applied by the backend on the first page load:
+
+```erb
+<li>
+  <%= icon(current_user.likes?(pub) ? "fas" : "far" , "heart") %>
+<li>
+```
+
 
 
 
