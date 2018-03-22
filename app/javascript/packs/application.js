@@ -6,7 +6,9 @@ import { toggleNavbarBackground } from '../components/navbar';
 import { loadMap } from '../components/map';
 import ReallySmoothScroll from 'really-smooth-scroll';
 import { toggleIcons } from '../components/pub';
+import Rails from 'rails-ujs';
 
+Rails.start();
 loadMap();
 autocomplete();
 toggleNavbarBackground();
