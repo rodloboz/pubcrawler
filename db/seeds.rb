@@ -45,7 +45,7 @@ pubs = [
     name: "Silk Club",
     address: "R. da Misericórdia 14, Edifício Espaço Chiado - 1200-273 Lisboa",
     district: "Bairro Alto",
-    description: "Located centrally, in the Chiado district of Lisbon, the swanky Silk Club now combines a restaurant, rooftop bar and club. The venue has a vibrant atmosphere, particularly on weekends when things heat up considerably and it becomes a great spot for drinking and dancing to tunes spun by their resident DJ."
+    description: "Located centrally, in the Chiado district of Lisbon, the swanky Silk Club now combines a restaurant, rooftop bar and club. The venue has a vibrant atmosphere, particularly on weekends when things heat up considerably and it becomes a great spot for drinking and dancing to tunes spun by their resident DJ.",
     photo: "https://media-cdn.tripadvisor.com/media/photo-s/02/b7/05/09/silk-club.jpg"
   },
   {
@@ -59,14 +59,14 @@ pubs = [
     name: "Casa Independente",
     district: "Mouraria",
     address: " Largo do Intendente Pina Manique 45, 1100-088 Lisboa",
-    description: "There's always something going on at this creative space overlooking a sleepy plaza just north of Largo Martim Moniz. You can wander through rooms looking at strange and curious artwork, join the smokers on the plant-filled back patio, or nurse drinks in quiet corners of this rambling old space."
+    description: "There's always something going on at this creative space overlooking a sleepy plaza just north of Largo Martim Moniz. You can wander through rooms looking at strange and curious artwork, join the smokers on the plant-filled back patio, or nurse drinks in quiet corners of this rambling old space.",
     photo: "https://lifecooler.com/files/registos/imagens/441045/262401.jpg"
   },
   {
     name: "Red Frog Speakeasy",
     address: " Rua do Salitre 5A, 1250-196 Lisboa",
     district: "Avenida da Liberdade",
-    description: "This quirky yet stylish speakeasy style bar located on Avenida da Liberdade, has something of a New York vibe. Specialising in Prohibition era cocktails as well as later classics, this is a bar that knows its liquid history."
+    description: "This quirky yet stylish speakeasy style bar located on Avenida da Liberdade, has something of a New York vibe. Specialising in Prohibition era cocktails as well as later classics, this is a bar that knows its liquid history.",
     photo: "http://4.bp.blogspot.com/-r9utZhIOOc8/VUPInOsaF0I/AAAAAAAAobc/DfDtAbKeCEI/s1600/11210419_10153208382635926_172709855754488902_n.jpg"
   }
   {
