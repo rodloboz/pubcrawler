@@ -9,10 +9,12 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
-  <body>
+  <body class="<%= controller_name %> <%= action_name %>">
+    <%= render 'shared/navbar' %>
     <%= yield %>
-    <%= javascript_include_tag 'application' %>
+    <%= render 'shared/footer' %>
+    <%= render 'shared/modal' %>
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
-    <%= javascript_pack_tag 'map' %>
+    <%= javascript_pack_tag 'application' %>
   </body>
 </html>

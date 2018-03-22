@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  favorited: one
+  favorited_type: Favorited
+
+two:
+  user: two
+  favorited: two
+  favorited_type: Favorited

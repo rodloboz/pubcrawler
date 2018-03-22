@@ -5,7 +5,10 @@
     "@rails/webpacker": "^3.2.2",
     "bootstrap": "3",
     "gmaps": "^0.4.24",
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "rails-ujs": "^5.1.5",
+    "really-smooth-scroll": "^2.1.1",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.1.0"

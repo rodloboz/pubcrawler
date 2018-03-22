@@ -1,2 +1,16 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%= render 'shared/banner' %>
+
+<div class="container">
+  <section id="section-one">
+    <h4>LISBON</h4>
+    <div class="row">
+      <% @pubs.each do |pub| %>
+        <div class="col-xs-12 col-sm-4">
+          <%= render pub %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</div>
+
+

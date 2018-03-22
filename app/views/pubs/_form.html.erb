@@ -1,13 +1,15 @@
-
-<%= simple_form_for(@pub) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :address %>
+<%= simple_form_for(Pub.new) do |f| %>
+  <div class="modal-body">
+      <div class="form-inputs">
+        <%= f.input :name %>
+        <%= f.input :address %>
+        <%= f.input :district %>
+        <%= f.input :description %>
+        <%= f.input :photo %>
+      </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="modal-footer">
+    <button id="closeButton" type="button" class="btn btn-base btn-clear">Cancel</button>
+    <%= f.button :submit, class: "btn btn-base btn-brand" %>
   </div>
 <% end %>

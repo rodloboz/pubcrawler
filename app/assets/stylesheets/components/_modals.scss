@@ -1,0 +1,36 @@
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal.in {
+  background: rgba(20,20,20,0.8);
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px; /* Adjusts for spacing */
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.modal-header {
+  border: none;
+}
+
+.modal-content {
+  padding: 30px;
+  color: white;
+  background: rgba(20,20,20,0.6);
+}
+
+.modal-footer {
+  border: none;
+}

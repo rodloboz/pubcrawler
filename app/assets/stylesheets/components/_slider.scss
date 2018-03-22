@@ -1,0 +1,58 @@
+$duration: 450ms;
+$tileWidth: 360px;
+$tileHeight: 540px;
+$iconSize: 50px;
+$growFactor: 1.5; // 1.5 times the original size
+
+$moveLeft: -($tileWidth * ($growFactor - 1) / 2);
+$moveRight: $tileWidth * ($growFactor - 1);
+
+.slider-row {
+  overflow: scroll;
+  width: 100%;
+}
+
+.slider-row__inner {
+  transition: $duration transform;
+  font-size: 0;
+  white-space: nowrap;
+  margin: ($tileHeight / 2) 0;
+  padding-bottom: 10px; // Account for OS X scroll bar
+}
+
+.tile {
+  position: relative;
+  display: inline-block;
+  width: $tileWidth;
+  height: $tileHeight;
+  margin-right: 10px;
+  // cursor: pointer
+  transition: $duration all;
+  transform-origin: center left;
+}
+
+.slide-row__inner:hover {
+  transform: translate3d($moveLeft, 0, 0);
+}
+
+.slide-row__inner:hover .tile {
+  // Fade out every tile
+  opacity: .3;
+
+  // And then grow the current tile and make it opaque again
+  &:hover {
+    transform: scale($growFactor);
+    opacity: 1;
+
+  }
+// And finally move all tiles right of the current tile to the right,
+// so its flush against the hovered tile
+}
+
+.tile:hover ~ .tile {
+  transform: translate3d($moveRight, 0, 0);
+}
+
+
+
+

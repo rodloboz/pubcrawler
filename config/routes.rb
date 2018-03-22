@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :pubs
+  devise_for :users
   root to: 'pages#home'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :pubs
+  resources :favorite_pubs, only: [:create, :destroy]
 end

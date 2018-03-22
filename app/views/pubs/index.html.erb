@@ -1,40 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<div style="float:left">
-  <h1>Pubs</h1>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Address</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @pubs.each do |pub| %>
-        <tr id=<%= "pub-#{pub.id}" %>>
-          <td><%= pub.name %></td>
-          <td><%= pub.address %></td>
-          <td><%= link_to 'Show', pub %></td>
-          <td><%= link_to 'Edit', edit_pub_path(pub) %></td>
-          <td><%= link_to 'Destroy', pub, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <br>
-
-  <%= link_to 'New Pub', new_pub_path %>
-
+<div class="results-container">
+    <% @pubs.each do |pub| %>
+      <div class="col-xs-12 col-sm-6">
+        <%= render pub %>
+      </div>
+    <% end %>
 </div>
 
 <div
   id="map"
-  style="width: 40%;
-  float: right;
-  height: 100vh;"
+  class="search-map"
   data-markers="<%= @markers.to_json %>"
 ></div>

@@ -1,5 +1,7 @@
 class PubsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
   before_action :set_pub, only: [:show, :edit, :update, :destroy]
+  layout "search", only: [:index]
 
   # GET /pubs
   # GET /pubs.json
@@ -13,17 +15,24 @@ class PubsController < ApplicationController
         # infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
       }
     end
-
   end
 
   # GET /pubs/1
   # GET /pubs/1.json
   def show
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   # GET /pubs/new
   def new
     @pub = Pub.new
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   # GET /pubs/1/edit
@@ -78,6 +87,6 @@ class PubsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pub_params
-      params.require(:pub).permit(:name, :address)
+      params.require(:pub).permit(:name, :address, :description, :photo, :district)
     end
 end

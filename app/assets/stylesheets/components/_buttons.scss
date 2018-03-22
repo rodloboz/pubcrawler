@@ -1,0 +1,145 @@
+.btn {
+  outline: 0 !important;
+}
+
+.btn-base {
+  letter-spacing: 1.5px;
+  font-weight: lighter;
+  padding: 10px 25px;
+  transition: background 0.3s ease;
+  word-break:break-all;
+  @include hover-state {
+    background: transparent;
+  }
+}
+
+.btn-brand {
+  color: #FFF;
+  fill: #FFF;
+  border: 1px solid $brand-color;
+  background: $brand-color;
+  transition: background 0.3s ease;
+  @include hover-state {
+    color: #FFF;
+    fill: #FFF;
+    border: 1px solid $brand-color;
+    background: $brand-color;
+    opacity: 0.8;
+  }
+}
+
+.btn-clear {
+  color: #FFF;
+  fill: #FFF;
+  border: 1px solid white;
+  background: transparent;
+  transition: background 0.3s ease;
+  @include hover-state {
+    color: #FFF;
+    fill: #FFF;
+    border: 1px solid white;
+    background: transparent;
+    opacity: 0.8;
+  }
+}
+
+.btn-upcase {
+  text-transform: uppercase;
+}
+
+.btn-full-w {
+  width: 100%;
+}
+
+.btn-shadow {
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.btn-shadow-circle {
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+.btn-brand {
+  color: #FFF;
+  fill: #FFF;
+  border: 1px solid $brand-color;
+  background: $brand-color;
+  transition: background 0.3s ease;
+  @include hover-state {
+    color: #FFF;
+    fill: #FFF;
+    border: 1px solid $brand-color;
+    background: $brand-color;
+    opacity: 0.8;
+  }
+}
+
+.btn-brand-inverse {
+  color: $brand-color;
+  fill: $brand-color;
+  border: 1px solid $brand-color;
+  background: #FFF;
+  transition: background 0.3s ease;
+  @include hover-state {
+    color: #FFF;
+    fill: #FFF;
+    background: $brand-color;
+  }
+}
+
+.btn-signup-submit {
+  color: #FFF;
+  fill: #FFF;
+  border: 1px solid $brand-color;
+  background: $brand-color;
+  transition: opacity 0.3s ease;
+  transition: background 0.3s ease;
+  @include hover-state {
+    opacity: 0.8;
+    background: $brand-color !important;
+    color: #FFF;
+  }
+}
+
+.btn-reset-password {
+  color: #FFF;
+  border: 1px solid $accent-color;
+  background: $accent-color;
+  transition: opacity 0.3s ease;
+  transition: background 0.3s ease;
+  @include hover-state {
+    opacity: 0.8;
+    color: #FFF;
+    background: $accent-color !important;
+    border: 1px solid $accent-color;
+  }
+}
+
+.btn-signup {
+  margin-bottom: 15px;
+  letter-spacing: 1.5px;
+  font-weight: lighter;
+  color: #FFF;
+  fill: #FFF;
+  padding: 10px 25px;
+  transition: background 0.3s ease;
+  word-break:break-all;
+  @include hover-state {
+    color: white;
+    opacity: 0.8;
+  }
+}
+
+
+.clear-button {
+  letter-spacing: 1.5px;
+  font-weight: lighter;
+  padding: 10px 25px;
+  border: 2px solid white;
+  color: white;
+  &:hover {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+  }
+}

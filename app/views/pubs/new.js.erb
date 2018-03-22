@@ -1,0 +1,37 @@
+var modalContent = "<%= j render(partial: 'pubs/new') %>";
+var modal = document.getElementById('mainModal');
+
+var closeModal = () => {
+  modal.classList.remove('in');
+  modal.style.display = 'none';
+}
+
+var openModal = () => {
+  modal.classList.add('in');
+  modal.style.display = 'block';
+}
+
+modal.querySelector('.modal-content').innerHTML = modalContent;
+openModal();
+
+var cancelBtn = document.getElementById('closeButton');
+cancelBtn.addEventListener('click', closeModal);
+
+document.addEventListener("click", function(evt) {
+    var flyoutElement = document.querySelector('.modal-dialog'),
+        targetElement = evt.target;  // clicked element
+
+    do {
+        if (targetElement == flyoutElement) {
+            // This is a click inside. Do nothing, just return.
+            console.log("Clicked inside!");
+            return;
+        }
+        // Go up the DOM
+        targetElement = targetElement.parentNode;
+    } while (targetElement);
+
+    // This is a click outside.
+    closeModal()
+});
+

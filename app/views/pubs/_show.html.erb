@@ -1,0 +1,13 @@
+<div class="modal-body">
+  <div class="row">
+    <div class="col-xs-3">
+      <%= image_tag(@pub.photo, class: "pub-img") %>
+    </div>
+    <div class="col-xs-9">
+      <p><%= @pub.name %></p>
+      <p><%= @pub.address %></p>
+      <p><%= @pub.description %></p>
+      <button id="closeButton" type="button" class="btn btn-base btn-clear">Close</button>
+    </div>
+  </div>
+</div>

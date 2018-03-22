@@ -1,13 +1,32 @@
 /* Main navbar */
 .navbar-wagon {
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
-  background: white;
   transition: all 0.3s ease;
   height: 70px;
   padding: 0px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.navbar-wagon-transparent {
+  background: transparent;
+  animation: fadeOutBg 250ms ease-in-out;
+}
+
+.navbar-wagon-dark {
+  background: #060606;
+  // box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  opacity: 1;
+  animation: fadeInBg 250ms ease-in-out;
+}
+
+.navbar-wagon-fixed {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+  width: 100%;
+  transition: top 600ms;
 }
 
 /* Logo */
@@ -37,12 +56,12 @@
 
 /* Navbar link */
 .navbar-wagon-link {
-  color: #616668;
+  color: white;
   font-size: 14px;
-}
-.navbar-wagon-link:hover {
-  color: #da552f;
-  text-decoration: none;
+  @include hover-state {
+    color:$brand-color;
+    text-decoration: none;
+  }
 }
 
 /* Dropdown menu */
@@ -74,4 +93,14 @@
   transform: rotate(45deg);
   border-left: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
+}
+
+@keyframes fadeInBg {
+  0%   { background: transparent; }
+  100% { background: #060606; }
+}
+
+@keyframes fadeOutBg {
+  0% { background: #060606; }
+  100%   { background: transparent; }
 }

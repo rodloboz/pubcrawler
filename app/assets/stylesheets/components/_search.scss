@@ -1,0 +1,19 @@
+.results-container {
+    width: 60%;
+    overflow-y: auto;
+    height: calc(100vh - 70px);
+    margin-top: 70px; left: 0;
+    position: absolute;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.search-map {
+  width: 40%;
+  height: calc(100vh - 70px);
+  margin-top: 70px; right: 0;
+  position: absolute;
+  div {
+    outline: none;
+  }
+}

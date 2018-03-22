@@ -1,0 +1,147 @@
+.banner {
+  color: white;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.banner h1 {
+  text-transform: none;
+  font-family: 'Monoton', serif;
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 70px;
+  text-shadow: 0 2px 3px rgba(0,0,0,.4);
+}
+.banner p {
+  font-size: 25px;
+  font-weight: lighter;
+  color: white;
+  margin-bottom: 30px;
+  text-shadow: 0 2px 3px rgba(0,0,0,.4);
+}
+
+.banner {
+  i {
+    font: normal 60px/ 30px 'Monoton', Helvetica, Arial;
+    color: #EEDDE0;
+    text-shadow: 0 0 30px #D23333,
+      0 0 10px rgba(230, 161, 173, 0.41),
+      0 0 100px #DF7070,
+      0 0 500px #D64747,
+      5px 9px 5px rgba(0, 0, 0, 0.5);
+  }
+
+  i.off {
+    color: rgba(255, 255, 255, 0.61);
+    // color: rgba(46, 46, 46, 0.61);
+    text-shadow: 7px 7px 5px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.slideshow {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0;
+  z-index: -1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slideshow li {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover !important;
+  opacity: 0;
+  z-index: 0;
+  opacity: 0;
+  animation: imageAnimation 50s linear infinite;
+}
+.banner::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(to bottom, rgba(0,101,168,0.1)  60%, rgba(20,20,20,0.8) 90%), asset-url('banner_01.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover !important;
+  z-index: -2;
+  animation: smooth 50s ease-out infinite;
+}
+
+.slideshow li:nth-child(1) {
+  background-image: linear-gradient(to bottom, rgba(0,101,168,0.1)  60%, rgba(20,20,20,0.8) 90%), asset-url('banner_01.jpg');
+}
+.slideshow li:nth-child(2) {
+  background-image: linear-gradient(to bottom, rgba(0,101,168,0.1)  60%, rgba(20,20,20,0.8) 90%), asset-url('banner_02.jpg');
+  animation-delay: 10s;
+}
+.slideshow li:nth-child(3) {
+  background-image: linear-gradient(to bottom, rgba(0,101,168,0.1)  60%, rgba(20,20,20,0.8) 90%), asset-url('banner_03.jpg');
+  animation-delay: 20s;
+}
+.slideshow li:nth-child(4) {
+  background-image: linear-gradient(to bottom, rgba(0,101,168,0.1)  60%, rgba(20,20,20,0.8) 90%), asset-url('banner_04.jpg');
+  animation-delay: 30s;
+}
+
+@keyframes imageAnimation {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1
+  }
+  30% {
+    opacity: 0
+  }
+}
+
+@-webkit-keyframes smooth {
+  0% { opacity: 1;}
+  50% { opacity: 0;}
+}
+
+$stem-height: 80px;
+$stem-width: 6px;
+$pointer-width: 6px;
+$pointer-space: 20px;
+
+.fa-chevron-down {
+  font-size: 30px;
+  color: white;
+  position: absolute;
+  top: 85%;
+  right: 50%;
+  cursor: pointer;
+  animation: 3s soft-blink infinite alternate;
+  // position: absolute;
+  // right: 50%;
+  // top: 65%;
+  // opacity: 0;
+}
+
+@keyframes soft-blink {
+  0% { opacity: 0.8; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0; }
+}
