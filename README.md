@@ -12,6 +12,7 @@ Live demo here https://pubcrawlerapp.herokuapp.com/
 
 * [Getting started](#getting-started)
 * [Deploying to Heroku](#deploying-to-heroku)
+* [Adding a Datepicker](#adding-a-datepicker)
 * [Adding Google Maps](#adding-google-maps)
 * [Adding a Favoriting System](#adding-a-favoriting-system)
 * [Setting up Devise for AJAX requests](#setting-up-devise-for-ajax-requests)
@@ -42,6 +43,53 @@ If deploying to heroku fails, it might be an issue with the webpacker version an
 $ heroku buildpacks:clear
 $ heroku buildpacks:set heroku/nodejs
 $ heroku buildpacks:add heroku/ruby
+```
+
+## Adding a Datepicker
+
+There are many datepickers available, but many students end up trying to implement datepicker gems with outdated documentation or which require jQuery.
+
+My personal preference goes for [flatpicker](https://flatpickr.js.org). It is very light, highly customizable, includes a timepicker and does not require students to add moment.js
+
+Setting up is simple:
+
+```bash
+$ yarn add flackpicker
+```
+
+Then in the pack file responsible for importing css, in this case `app/javascript/packs/application.css`
+
+```javascript
+@import '../styles/flatpickr.css';
+```
+
+Flatpicker takes a DOM element as the first argument, and a javascript options object to configure flatpicker behaviour.
+
+In this example I'm using a startDate input and an endDate input and the minimum date of the endDate input is defined by the selected date on the startDate input:
+
+```javascript
+import flatpickr from 'flatpickr';
+
+const startDateinput = document.getElementById('crawl_start_date');
+  const endDateinput = document.getElementById('crawl_end_date');
+
+  if (startDateinput && endDateinput) {
+    flatpickr(startDateinput, {
+    minDate: 'today',
+    dateFormat: 'd-m-Y',
+    onChange: function(_, selectedDate) {
+      if (selectedDate === '') {
+        return endDateinput.disabled = true;
+      }
+      endDateCalendar.set('minDate', selectedDate);
+      endDateinput.disabled = false;
+    }
+  });
+    const endDateCalendar =
+      flatpickr(endDateinput, {
+        dateFormat: 'd-m-Y',
+      });
+  }
 ```
 
 ## Adding Google Maps
