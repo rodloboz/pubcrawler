@@ -24,6 +24,8 @@ You can use an API key for [Google's Maps Geocoding API](https://console.develop
 GOOGLE_API_SERVER_KEY: AIz*********************************TUZ
 ```
 
+NOTE: Only `admin` users can create new instances of `Pub`.
+
 ## Deploying to heroku
 
 If deploying to heroku fails, it might be an issue with the webpacker version and you'll have to manually specify the heroku buildpacks:
