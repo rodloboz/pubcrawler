@@ -6,7 +6,8 @@ class PubsController < ApplicationController
   # GET /pubs
   # GET /pubs.json
   def index
-    @pubs = Pub.all.where.not(latitude: nil, longitude: nil)
+
+    @pubs = policy_scope(Pub).where.not(latitude: nil, longitude: nil)
 
     @markers = @pubs.map do |pub|
       {
@@ -83,6 +84,7 @@ class PubsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_pub
       @pub = Pub.find(params[:id])
+      authorize @pub
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

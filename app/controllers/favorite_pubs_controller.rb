@@ -1,5 +1,6 @@
 class FavoritePubsController < ApplicationController
   before_action :set_pub
+  skip_after_action :verify_authorized
 
   def create
     Favorite.create(favorited: @pub, user: current_user)

@@ -1,4 +1,4 @@
-<div class="navbar-wagon navbar-wagon-fixed">
+<div id="navbar-wagon" class="navbar-wagon navbar-wagon-fixed">
   <!-- Logo -->
   <a href="/" class="navbar-wagon-brand">
     <%= image_tag "logo.png", alt: "Le Wagon"%>
@@ -8,7 +8,6 @@
   <div class="navbar-wagon-right hidden-xs hidden-sm">
     <%= link_to 'Pubs', pubs_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <a href="" class="navbar-wagon-item navbar-wagon-link">Crawls</a>
-    <a href="" class="navbar-wagon-item navbar-wagon-link">Messages</a>
 
     <% if user_signed_in? %>
 
@@ -17,9 +16,11 @@
       <div class="dropdown">
         <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
         <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-          <li>
-            <%= link_to 'New Pub', new_pub_path, class: "navbar-wagon-item navbar-wagon-link", remote: true %>
-          </li>
+          <% if current_user.admin? %>
+            <li>
+              <%= link_to 'New Pub', new_pub_path, class: "navbar-wagon-item navbar-wagon-link", remote: true %>
+            </li>
+          <% end %>
           <li><a href="#">Dashboard</a></li>
           <li>
             <%= link_to destroy_user_session_path, method: :delete do %>
@@ -30,8 +31,8 @@
       </div>
     </div>
     <% else %>
-      <%= link_to "Sign Up", new_user_registration_path, {class: "navbar-wagon-item navbar-wagon-link"} %>
-      <%= link_to "Log In", new_user_session_path, {class: "navbar-wagon-item navbar-wagon-link"} %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "navbar-wagon-item navbar-wagon-link", remote: true %>
+      <%= link_to "Log In", new_user_session_path, class: "navbar-wagon-item navbar-wagon-link", remote: true %>
     <% end %>
   </div>
 

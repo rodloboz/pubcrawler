@@ -1,0 +1,56 @@
+<div class="login-wrap">
+  <div class="login-html">
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+    <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+    <div class="login-form">
+      <div class="sign-in-htm">
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), remote: true) do |f| %>
+          <%= f.error_notification %>
+          <div class="group">
+            <label for="user[email]" class="label">Email Address</label>
+            <%= f.input :email, required: true, autofocus: true, label: false, input_html: { id: "sign_in_user_email"} %>
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Password</label>
+            <%= f.input :password, required: true, label: false, input_html: { id: "sign_in_user_password"} %>
+          </div>
+          <div class="group">
+            <input id="check" type="checkbox" class="check" checked>
+            <label for="check"><span class="icon"></span> Keep me Signed in</label>
+          </div>
+          <div class="group">
+            <input type="submit" class="button" value="Sign In">
+          </div>
+          <div class="hr"></div>
+          <div class="foot-lnk">
+            <a href="#forgot">Forgot Password?</a>
+          </div>
+        <% end %>
+      </div>
+      <div class="sign-up-htm">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
+          <div class="group">
+            <label for="pass" class="label">Email Address</label>
+            <%= f.input :email, required: true, autofocus: true, label: false, input_html: { id: "sign_up_user_email"} %>
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Password</label>
+            <%= f.input :password, required: true, label: false, input_html: { id: "sign_up_user_password"} %>
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Repeat Password</label>
+            <%= f.input :password_confirmation, required: true, label: false, input_html: { id: "sign_up_user_confirmation_password"} %>
+          </div>
+          <div class="group">
+            <input type="submit" class="button" value="Sign Up">
+          </div>
+          <div class="hr"></div>
+          <div class="foot-lnk">
+            <label for="tab-1">Already Member?</a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

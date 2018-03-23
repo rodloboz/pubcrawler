@@ -136,7 +136,6 @@ I'll be using FontAwesome icons, which should be full when liked (`fas` class) a
 
 ```javascript
 import Rails from 'rails-ujs';
-Rails.start()
 
 const toggleIcons = function() {
   const icons = document.querySelectorAll('.menu-content i')
@@ -151,28 +150,29 @@ const toggleIcons = function() {
     const pubId = pub.id.split('-')[1]
     icon.addEventListener('click', () => {
       if (icon.classList.contains('far')) {
-        $.ajax({
-          type: 'POST',
-          url: '/favorite_pubs',
-          data: {pub_id: pubId},
-          success: function(response){
-            toggleIcon(icon)
+        fetch('/favorite_pubs', {
+          method: 'post',
+          body: JSON.stringify({pub_id: pubId}),
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': Rails.csrfToken()
           },
-          error: function(response){
-            alert('error')
-          }
+          credentials: 'same-origin'
+        }).then(function(response) {
+          toggleIcon(icon);
         })
+
       } else if (icon.classList.contains('fas')) {
-        $.ajax({
-          type: 'DELETE',
-          url: `/favorite_pubs/${pubId}`,
-          data: {pub_id: pubId},
-          success: function(response){
-            toggleIcon(icon)
+        fetch(`/favorite_pubs/${pubId}`, {
+          method: 'delete',
+          body: JSON.stringify({pub_id: pubId}),
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': Rails.csrfToken()
           },
-          error: function(response){
-            alert('error')
-          }
+          credentials: 'same-origin'
+        }).then(function(response) {
+          toggleIcon(icon);
         })
       }
     })
@@ -180,6 +180,7 @@ const toggleIcons = function() {
 };
 
 export { toggleIcons };
+
 ```
 
 And finally setup the frontend with the logic to determine which lass should be applied by the backend on the first page load:
@@ -188,7 +189,7 @@ And finally setup the frontend with the logic to determine which lass should be 
 <li>
   <%= icon(current_user.likes?(pub) ? "fas" : "far" , "heart") %>
 <li>
-``
+```
 
 
 
