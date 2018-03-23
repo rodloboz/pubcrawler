@@ -6,6 +6,8 @@ This app serves to showcase the implementation using webpacker and ES6 syntax of
 
 It is not intended to be the holy grail in terms of how to implement these features, but merely a reference on how to move away from jQuery and the Asset Pipeline.
 
+Live demo on here [https://pubcrawlerapp.herokuapp.com/]
+
 ## Getting started
 
 After cloning the app, create the db, run the migration and seed.
