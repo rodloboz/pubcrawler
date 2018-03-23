@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  crawl: one
+  pub: one
+
+two:
+  crawl: two
+  pub: two

@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :pubs
+  resources :crawls
   resources :favorite_pubs, only: [:create, :destroy]
 end

@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322235855) do
+ActiveRecord::Schema.define(version: 20180323150808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "crawls", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "favorites", force: :cascade do |t|
     t.bigint "user_id"
@@ -23,6 +31,15 @@ ActiveRecord::Schema.define(version: 20180322235855) do
     t.datetime "updated_at", null: false
     t.index ["favorited_type", "favorited_id"], name: "index_favorites_on_favorited_type_and_favorited_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "pub_crawls", force: :cascade do |t|
+    t.bigint "crawl_id"
+    t.bigint "pub_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crawl_id"], name: "index_pub_crawls_on_crawl_id"
+    t.index ["pub_id"], name: "index_pub_crawls_on_pub_id"
   end
 
   create_table "pubs", force: :cascade do |t|
@@ -56,4 +73,6 @@ ActiveRecord::Schema.define(version: 20180322235855) do
   end
 
   add_foreign_key "favorites", "users"
+  add_foreign_key "pub_crawls", "crawls"
+  add_foreign_key "pub_crawls", "pubs"
 end

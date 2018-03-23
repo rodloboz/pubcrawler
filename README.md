@@ -8,6 +8,14 @@ It is not meant to be the end-all implementation solution for these features, bu
 
 Live demo here https://pubcrawlerapp.herokuapp.com/
 
+## Table of Contents
+
+* [Getting started](#getting-started)
+* [Deploying to Heroku](#deploying-to-heroku)
+* [Adding Google Maps](#adding-google-maps)
+* [Adding a Favoriting System](#adding-a-favoriting-system)
+* [Setting up Devise for AJAX requests](#setting-up-devise-for-ajax-requests)
+
 ## Getting started
 
 After cloning the app, create the db, run the migrations and seed.
@@ -198,9 +206,50 @@ And finally setup the server side generated frontend with the logic to determine
 <li>
 ```
 
+## Setting up Devise for AJAX requests
 
+Let's say you want to have your devise Sign In and Sign Up forms be displayed in a modal and submitt those authentication actions via ajax.
 
+First, expose the devise controllers:
 
+```bash
+$ rails generate devise:controllers users
+```
 
+This gives you access to all the devise controllers for the `User` model.
 
+Inside `app/controllers/users` add this single line to the `SessionsController`and `RegistrationsController`:
 
+```ruby
+respond_to :html, :js
+```
+
+There is no need to uncomment the rest of the code.
+
+Next, edit the routes to map devise to the custom Sessions and Registration controllers:
+
+```ruby
+Rails.application.routes.draw do
+  devise_for :users, controllers: {
+        sessions: 'users/sessions',
+        registrations: 'users/registrations'
+      }
+end
+```
+
+You'll need access to the devise views:
+
+```bash
+$ rails generate devise:views
+```
+
+Finally, submit your Sign Up and Sign In links with `remote: true`. Rails will look for a `new.js.erb` inside the respective views folder (`app/views/devise/sessions`or `app/views/devise/registrations`).
+
+Inside `new.js.erb` you can target a modal and inject the devise form:
+
+```javascript
+var modalContent = "<%= j render(partial: 'devise/shared/authentication') %>";
+var modal = document.getElementById('mainModal');
+
+modal.querySelector('.modal-content').innerHTML = modalContent;
+```
