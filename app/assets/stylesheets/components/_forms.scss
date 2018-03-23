@@ -1,3 +1,4 @@
+.form-control[readonly],
 .form-control {
   border:none;
   padding:15px 20px;
@@ -13,4 +14,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+input:disabled {
+  cursor: not-allowed !important;
 }

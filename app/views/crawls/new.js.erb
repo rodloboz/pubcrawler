@@ -19,10 +19,13 @@ cancelBtn.addEventListener('click', closeModal);
 
 document.addEventListener("click", function(evt) {
     var flyoutElement = document.querySelector('.modal-dialog'),
+        calendars = document.querySelectorAll('.flatpickr-calendar'),
         targetElement = evt.target;  // clicked element
 
     do {
-        if (targetElement == flyoutElement) {
+        if (targetElement == flyoutElement ||
+            targetElement == calendars[0] ||
+            targetElement == calendars[1]) {
             // This is a click inside. Do nothing, just return.
             return;
         }

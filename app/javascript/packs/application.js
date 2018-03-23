@@ -1,4 +1,4 @@
-import '../src/app.css';
+import './application.css';
 import "bootstrap";
 import GMaps from 'gmaps/gmaps.js';
 import { autocomplete } from '../components/autocomplete';

@@ -1,7 +1,7 @@
-import Banner01 from '../../assets/images/banner_01.jpg';
-import Banner02 from '../../assets/images/banner_02.jpg';
-import Banner03 from '../../assets/images/banner_03.jpg';
-import Banner04 from '../../assets/images/banner_04.jpg';
+import Banner01 from 'images/banner_01.jpg';
+import Banner02 from 'images/banner_02.jpg';
+import Banner03 from 'images/banner_03.jpg';
+import Banner04 from 'images/banner_04.jpg';
 
 function activateNeonBannerText() {
   let textHolder = document.getElementById('banner-text'),
