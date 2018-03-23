@@ -4,3 +4,13 @@
   background:rgba(255,255,255,.1);
   color: white;
 }
+
+.inline_field_wrapper {
+    display: inline-block;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

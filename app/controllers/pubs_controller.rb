@@ -30,6 +30,7 @@ class PubsController < ApplicationController
   # GET /pubs/new
   def new
     @pub = Pub.new
+    authorize @pub
     respond_to do |format|
       format.js
       format.html
