@@ -2,21 +2,27 @@
 
 Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
 
-This app serves to showcase the implementation using webpacker and ES6 syntax of some of the most common features used by Le Wagon students in their projects.
+This app is intended to showcase the implementation of some of the most common features used by Le Wagon students in their projects using webpacker and ES6 syntax as opposed to jQuery and the Asset Pipeline as recommended by the course curriculum.
 
-It is not intended to be the holy grail in terms of how to implement these features, but merely a reference on how to move away from jQuery and the Asset Pipeline.
+It is not meant to be the end-all implementation solution for these features, but merely to be used as a reference tool, namely to the Le Wagon Lisbon teaching staff and others.
 
 Live demo here https://pubcrawlerapp.herokuapp.com/
 
 ## Getting started
 
-After cloning the app, create the db, run the migration and seed.
+After cloning the app, create the db, run the migrations and seed.
 
 ```bash
 $ rails db:create db:migrate db:seed
 ```
 
 The seeds include addresses that will be geocoded. In order to take advantage of all of the features, make sure that all of the addresses were properly geocoded.
+
+You can use an API key for [Google's Maps Geocoding API](https://console.developers.google.com)
+
+```ruby
+GOOGLE_API_SERVER_KEY: AIz*********************************TUZ
+```
 
 ## Deploying to heroku
 
@@ -32,7 +38,7 @@ $ heroku buildpacks:add heroku/ruby
 
 For the basic setup I recommend following Le Wagon's [geocoding lecture](https://kitt.lewagon.com/knowledge/lectures/05-Rails%2F08-Airbnb-Geocoder)
 
-However, unlike the lecture setup, *map.js* is a component and goes in `app/javacript/components/`folder.
+However, unlike the lecture setup, *map.js* is a component and should go in the `app/javacript/components/` folder.
 
 You can pass several options when creating the map, such as to disable `streetViewControl`, `mapTypeControl`and `scrollwheel`:
 
@@ -46,7 +52,7 @@ const map = new GMaps({
 });
 ```
 
-To highlight markers when you over on their respective card, you need to add an event listener to each card and change the market the the event is fired:
+To highlight markers on hovering over their corresponding card, you need to add an event listener to each card and dynamically change the marker when the event is fired:
 
 ```javascript
 const cards = document.querySelectorAll('.card-row');
@@ -63,9 +69,9 @@ cards.forEach((card, index) => {
 
 ## Adding a Favoriting System
 
-A `user`can like/favorite another `model`. The simplest case is when the user will only be able to like/favorite another type of model, in which case this can be represented by a `Favorite` model which will reference a user and a liked model.
+A `user`can like/favorite another `model`. The simplest case is when the user is only allowed to like/favorite instances from a single model, in which case this can be represented by a `Favorite` class which will reference a user and the liked model.
 
-In this app I have implement a solution that will allow in the future to implement more models that can be liked/favorited by using a single polymorphic `favorites`table:
+In this app I have implement a solution that allows for the future implementation of more models that can be liked/favorited by using a single polymorphic `favorites` table:
 
 ```bash
 $ rails generate model favorite user:references favorited:references{polymorphic}
@@ -95,7 +101,7 @@ class Favorite < ActiveRecord::Base
 end
 ```
 
-Moving on to the user model, the following will allow to get all the favorites, but will also provide a way of returning just favorited pubs. This will come in handy later if we want to add other models to the favoriting system:
+Moving on to the user model, the following code allows us to get all the user favorites (from all likable models), but also provides a way of returning just the favorited pubs. This will come in handy later if we want to add other models to the favoriting system:
 
 ```ruby
 class User < ApplicationRecord
@@ -108,9 +114,9 @@ class User < ApplicationRecord
 end
 ```
 
-I've also added an instance method `likes?(pub)` that receives a pub object and return `true`if the user has liked that pub and `false` otherwise.
+I've also added an instance method `likes?(pub)` that receives a pub object and returns `true`if the user has liked that pub and `false` otherwise.
 
-I created a completely separate resource called `favorite_pubs`, but it is also possible to go with a more generic `favorites`controller. The routes will only provide for two actions: `create` and `destroy`.
+I created a completely separate resource called `favorite_pubs`, but it is also possible to go with a more generic `favorites` controller. The routes will only provide for two actions: `create` and `destroy`.
 
 I'll be submitting the requests with ajax, so the controller simply creates and destroys favorites as needed:
 
@@ -134,9 +140,11 @@ class FavoritePubsController < ApplicationController
 end
 ```
 
-I'll be using FontAwesome icons, which should be full when liked (`fas` class) and empty otherwise (`far`class). I setup event listeners for `'click'` which toggle those classes on and off and submit the respective ajax requests to create or destroy the favorites in the backend as needed:
+I'm using FontAwesome icons, which should be full when liked (`fas` class) and empty otherwise (`far`class). I've setup event listeners for `'click'` which toggle those classes on and off and submit the relevant ajax request to create or destroy the favorites in the backend as needed:
 
 ```javascript
+// pub.js
+
 import Rails from 'rails-ujs';
 
 const toggleIcons = function() {
@@ -160,9 +168,7 @@ const toggleIcons = function() {
             'X-CSRF-Token': Rails.csrfToken()
           },
           credentials: 'same-origin'
-        }).then(function(response) {
-          toggleIcon(icon);
-        })
+        }).then(() => toggleIcon(icon))
 
       } else if (icon.classList.contains('fas')) {
         fetch(`/favorite_pubs/${pubId}`, {
@@ -173,19 +179,16 @@ const toggleIcons = function() {
             'X-CSRF-Token': Rails.csrfToken()
           },
           credentials: 'same-origin'
-        }).then(function(response) {
-          toggleIcon(icon);
-        })
+        }).then(() => toggleIcon(icon))
       }
     })
   })
 };
 
 export { toggleIcons };
-
 ```
 
-And finally setup the frontend with the logic to determine which lass should be applied by the backend on the first page load:
+And finally setup the server side generated frontend with the logic to determine which class should be applied on the first page load:
 
 ```erb
 <li>

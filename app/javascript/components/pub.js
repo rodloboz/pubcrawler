@@ -21,9 +21,7 @@ const toggleIcons = function() {
             'X-CSRF-Token': Rails.csrfToken()
           },
           credentials: 'same-origin'
-        }).then(function(response) {
-          toggleIcon(icon);
-        })
+        }).then(() => toggleIcon(icon))
 
       } else if (icon.classList.contains('fas')) {
         fetch(`/favorite_pubs/${pubId}`, {
@@ -34,9 +32,7 @@ const toggleIcons = function() {
             'X-CSRF-Token': Rails.csrfToken()
           },
           credentials: 'same-origin'
-        }).then(function(response) {
-          toggleIcon(icon);
-        })
+        }).then(() => toggleIcon(icon))
       }
     })
   })
