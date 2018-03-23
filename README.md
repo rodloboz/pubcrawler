@@ -4,7 +4,7 @@ Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/ra
 
 This app is intended to showcase the implementation of some of the most common features used by Le Wagon students in their projects using webpacker and ES6 syntax as opposed to jQuery and the Asset Pipeline as recommended by the course curriculum.
 
-It is not meant to be the end-all implementation solution for these features, but merely to be used as a reference tool, namely to the Le Wagon Lisbon teaching staff and others.
+It is not meant to be the end-all implementation solution for these features, but merely to be used as a reference tool, namely by the Le Wagon Lisbon teaching staff and alumni.
 
 Live demo here https://pubcrawlerapp.herokuapp.com/
 
@@ -60,7 +60,7 @@ $ yarn add flackpicker
 Then in the pack file responsible for importing css, in this case `app/javascript/packs/application.css`
 
 ```javascript
-@import '../styles/flatpickr.css';
+@import 'flatpickr/dist/flatpickr.css';
 ```
 
 Flatpicker takes a DOM element as the first argument, and a javascript options object to configure flatpicker behaviour.
