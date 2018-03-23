@@ -1,4 +1,4 @@
-class PubPolicy < ApplicationPolicy
+class CrawlPolicy < ApplicationPolicy
   def create?
     @user.admin?
   end

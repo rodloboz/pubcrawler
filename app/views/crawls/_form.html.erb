@@ -1,11 +1,13 @@
-<%= simple_form_for(pub || Pub.new) do |f| %>
+<%= simple_form_for(crawl || Crawl.new) do |f| %>
   <div class="modal-body">
       <div class="form-inputs">
         <%= f.input :name %>
-        <%= f.input :address %>
-        <%= f.input :district %>
+        <%= f.input :city %>
+        <div class="form-row">
+          <%= f.input :start_date, as: :string, wrapper_html: { :class => "inline_field_wrapper" } %>
+          <%= f.input :end_date, as: :string, disabled: true, wrapper_html: { :class => "inline_field_wrapper" } %>
+        </div>
         <%= f.input :description %>
-        <%= f.input :photo %>
       </div>
   </div>
   <div class="modal-footer">

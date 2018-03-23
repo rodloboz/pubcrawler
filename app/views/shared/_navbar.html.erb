@@ -18,8 +18,12 @@
         <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
           <% if current_user.admin? %>
             <li>
+              <%= link_to 'New Crawl', new_crawl_path, class: "navbar-wagon-item navbar-wagon-link", remote: true %>
+            </li>
+            <li>
               <%= link_to 'New Pub', new_pub_path, class: "navbar-wagon-item navbar-wagon-link", remote: true %>
             </li>
+            <hr>
           <% end %>
           <li><a href="#">Dashboard</a></li>
           <li>

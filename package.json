@@ -2,8 +2,9 @@
   "name": "pubcrawler",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.2.2",
+    "@rails/webpacker": "^3.4.0",
     "bootstrap": "3",
+    "flatpickr": "^4.3.2",
     "gmaps": "^0.4.24",
     "jquery": "^3.3.1",
     "rails-ujs": "^5.1.5",
@@ -11,6 +12,7 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "webpack-dev-server": "^3.1.0"
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^2.11.1"
   }
 }
