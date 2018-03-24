@@ -1,34 +1,35 @@
 import mapboxgl from 'mapbox-gl';
 import redMarkerPng from 'images/map-marker-red.png';
 
-const mapElement = document.getElementById('map');
-const features = JSON.parse(mapElement.dataset.features);
-const redMarker = 'http://' + window.location.host + redMarkerPng;
-
-function addMarkers(map) {
-  map.addLayer({
-        "id": "points",
-        "type": "symbol",
-        "source": {
-            "type": "geojson",
-            "data": {
-                "type": "FeatureCollection",
-                "features": features
-            }
-        },
-        "layout": {
-            "icon-image": "cat",
-            "icon-size": 1,
-            "icon-allow-overlap": true
-        }
-    });
-}
 
 const loadMapbox = function() {
+
+  const mapElement = document.getElementById('map');
+  const features = JSON.parse(mapElement.dataset.features);
+  const redMarker = 'https://' + window.location.host + redMarkerPng;
   const token = process.env.MAPBOX_ACCESS_TOKEN;
-  mapboxgl.accessToken = token;
   const start = [-9.1370, 38.7083];
-  // const geojson = JSON.parse(mapElement.dataset.geojson);
+
+  function addMarkers(map) {
+    map.addLayer({
+          "id": "points",
+          "type": "symbol",
+          "source": {
+              "type": "geojson",
+              "data": {
+                  "type": "FeatureCollection",
+                  "features": features
+              }
+          },
+          "layout": {
+              "icon-image": "cat",
+              "icon-size": 1,
+              "icon-allow-overlap": true
+          }
+      });
+  }
+
+  mapboxgl.accessToken = token;
 
   const map = new mapboxgl.Map({
     container: 'map',

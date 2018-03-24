@@ -2,11 +2,13 @@
 <div class="card">
   <div class="wrapper" style="background: linear-gradient(to bottom,rgba(20,20,20, 0.8),rgba(76,76,76,0.2) 30%), url(<%= crawl.pubs.first.photo || "https://tvseriescritic.files.wordpress.com/2016/10/stranger-things-bicycle-lights-children.jpg" %>) center / cover no-repeat;">
     <div class="header">
-      <div class="date">
-        <span class="day"><%= crawl.start_date.strftime("%d") %></span>
-        <span class="month"><%= crawl.start_date.strftime("%b") %></span>
-        <span class="year"><%= crawl.start_date.strftime("%Y") %></span>
-      </div>
+      <% if crawl.start_date %>
+        <div class="date">
+          <span class="day"><%= crawl.start_date.strftime("%d")  %></span>
+          <span class="month"><%= crawl.start_date.strftime("%b") %></span>
+          <span class="year"><%= crawl.start_date.strftime("%Y") %></span>
+        </div>
+      <% end %>
       <% if current_user %>
         <ul class="menu-content">
           <li>

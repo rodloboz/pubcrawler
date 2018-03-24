@@ -8,6 +8,7 @@
           <%= f.input :end_date, as: :string, disabled: true, wrapper_html: { :class => "inline_field_wrapper" } %>
         </div>
         <%= f.input :description %>
+        <%= f.association :pubs, collection: Pub.all, allow_blank: false, input_html: { multiple: true } %>
       </div>
   </div>
   <div class="modal-footer">

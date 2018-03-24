@@ -40,6 +40,9 @@ class CrawlsController < ApplicationController
     authorize @crawl
     respond_to do |format|
       if @crawl.save
+        params[:crawl][:pub_ids].each do |id|
+          @crawl.pub_crawls.create(pub_id: id) unless id.blank?
+        end
         format.html { redirect_to @crawl, notice: 'Pub was successfully created.' }
         format.json { render :show, status: :created, location: @crawl }
       else
@@ -57,6 +60,9 @@ class CrawlsController < ApplicationController
 
   def destroy
     @crawl.destroy
+  end
+
+  def pubs
   end
 
   private
