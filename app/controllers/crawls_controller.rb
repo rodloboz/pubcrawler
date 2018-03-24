@@ -8,30 +8,22 @@ class CrawlsController < ApplicationController
   end
 
   def show
-    @pubs_coordinates = @crawl.pubs.map do |pub|
-      lng = pub.longitude unless pub.longitude.nil?
-      lat =  pub.latitude unless pub.latitude.nil?
-      feature = { "type": "Feature",
-                  "id": "#{pub.id}",
-                  "properties": {
-                    "description":
-                    "<div class=\"popup-bottom\">
-                    <h4 class=\"bold\">#{pub.name}</h4>
-                    <h5 class=\"light\">#{pub.district}</h5>
-                    </div>"
-                  },
-                  "geometry": {
-                      "type": "Point",
-                      "coordinates": [lng, lat]
-                  }
-      }
-      @markers = @crawl.pubs.map do |pub|
-        unless pub.longitude.nil? || pub.latitude.nil?
-          [pub.longitude, pub.latitude]
-        end
+    @features = @crawl.pubs.map do |pub|
+        { "type": "Feature",
+          "id": "#{pub.id}",
+          "properties": {
+            "description":
+            "<div class=\"popup-bottom\">
+            <h4 class=\"bold\">#{pub.name}</h4>
+            <h5 class=\"light\">#{pub.district}</h5>
+            </div>"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": [pub.longitude, pub.latitude]
+          }
+        }
       end
-  end
-
   end
 
   def new

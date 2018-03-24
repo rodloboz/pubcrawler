@@ -139,17 +139,68 @@ mapMarkers.forEach((marker, index) => {
 
 ## Adding Mapbox
 
+### Setting up the backend
+
+In order to add dynamic markers, mapbox need to receive an array of features. Here's an example of how we can set this up in our controller:
+
+```ruby
+@features = @crawl.pubs.map do |pub|
+        { "type": "Feature",
+          "id": "#{pub.id}",
+          "properties": {
+            "description":
+            "<div class=\"popup-bottom\">
+            <h4 class=\"bold\">#{pub.name}</h4>
+            <h5 class=\"light\">#{pub.district}</h5>
+            </div>"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": [pub.longitude, pub.latitude]
+          }
+        }
+  end
+```
+
+Then we pass these feartures to the frontend using the data atribute:
+
+```html
+<div
+  id="map"
+  class="search-map"
+  data-features="<%= @features.to_json %>"
+></div>
+```
+
+### Creating the map
+
+Add the Mapbox GL javaScript library:
+
 ```bash
 $ yarn add mapbox-gl
 ```
 
-Invert stylesheets pack tags
+Import Mapbox GL css in `app/javascripts/packs/application.css`
 
 ```javascript
 @import 'mapbox-gl/dist/mapbox-gl.css';
 ```
 
-Add a basic map // MAPBOX_ACCESS_TOKEN API environment variable
+Because we are styling the map element in the asset pipeline, we need to ensure that we import the asset stylesheets after the packs stylesheet. Otherwise, the mapbox-gl.css will prevail over our custom css styling.
+
+```ruby
+<%= stylesheet_pack_tag 'application', media: 'all' %>
+<%= stylesheet_link_tag 'application', media: 'all' %>
+```
+
+Mapbox requires a token. You'll need to sign up for an account and create a [token](https://www.mapbox.com/account/access-tokens). Add the token to your secret yml file.
+
+```yaml
+MAPBOX_ACCESS_TOKEN: pk.************************************************************************************_MA
+```
+In our component js file, we import the library, get the ENV variable token and define a starting position for the map [lgn, lat].
+
+Then we initiate the map with an hash of options, including the required style and disabling scrollZoom.
 
 ```javascript
 import mapboxgl from 'mapbox-gl';
@@ -168,12 +219,63 @@ const map = new mapboxgl.Map({
 });
 ```
 
-Add nagivation controls
+Adding nagivation controls:
 
 ```javascript
 map.addControl(new mapboxgl.NavigationControl());
-``
+```
 
+We can setup a function to add the markers which will be called when the map finishes loading:
+
+```javascript
+function addMarkers(map) {
+  map.addLayer({
+        "id": "points",
+        "type": "symbol",
+        "source": {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": features
+            }
+        },
+        "layout": {
+            "icon-image": "cat",
+            "icon-size": 1,
+            "icon-allow-overlap": true
+        }
+    });
+}
+```
+
+Then we parse the data attributes and call our function when the map loads. We also import an image stored in the Asset Pipiline to display as a marker:
+
+```javascript
+const features = JSON.parse(mapElement.dataset.features);
+const redMarker = 'http://' + window.location.host + redMarkerPng;
+
+map.on('load', function() {
+  map.loadImage(redMarker, function(error, image) {
+        if (error) throw error;
+        map.addImage('cat', image);
+        addMarkers(map);
+      });
+}
+```
+
+Finally we fit the map bounds to ours markers and fly in:
+
+```javascript
+const bounds = new mapboxgl.LngLatBounds();
+
+features.forEach((feature) => {
+    bounds.extend(feature.geometry.coordinates);
+});
+
+map.fitBounds(bounds, {
+      padding: 50
+  });
+```
 
 ## Adding a Favoriting System
 

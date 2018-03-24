@@ -2,7 +2,7 @@
   "name": "pubcrawler",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.4.0",
+    "@rails/webpacker": "^3.4.1",
     "bootstrap": "3",
     "flatpickr": "^4.3.2",
     "gmaps": "^0.4.24",

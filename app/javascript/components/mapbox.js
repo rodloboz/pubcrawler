@@ -1,10 +1,34 @@
 import mapboxgl from 'mapbox-gl';
+import redMarkerPng from 'images/map-marker-red.png';
+
+const mapElement = document.getElementById('map');
+const features = JSON.parse(mapElement.dataset.features);
+const redMarker = 'http://' + window.location.host + redMarkerPng;
+
+function addMarkers(map) {
+  map.addLayer({
+        "id": "points",
+        "type": "symbol",
+        "source": {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": features
+            }
+        },
+        "layout": {
+            "icon-image": "cat",
+            "icon-size": 1,
+            "icon-allow-overlap": true
+        }
+    });
+}
 
 const loadMapbox = function() {
-  mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
+  const token = process.env.MAPBOX_ACCESS_TOKEN;
+  mapboxgl.accessToken = token;
   const start = [-9.1370, 38.7083];
-  const mapElement = document.getElementById('map');
-  const markers = JSON.parse(mapElement.dataset.markers);
+  // const geojson = JSON.parse(mapElement.dataset.geojson);
 
   const map = new mapboxgl.Map({
     container: 'map',
@@ -57,8 +81,23 @@ const loadMapbox = function() {
               'fill-extrusion-opacity': .6
           }
       }, labelLayerId);
-  });
 
+      map.loadImage(redMarker, function(error, image) {
+        if (error) throw error;
+        map.addImage('cat', image);
+        addMarkers(map);
+      });
+
+      const bounds = new mapboxgl.LngLatBounds();
+
+      features.forEach((feature) => {
+          bounds.extend(feature.geometry.coordinates);
+      });
+
+      map.fitBounds(bounds, {
+            padding: 50
+        });
+  });
 }
 
 export { loadMapbox };
