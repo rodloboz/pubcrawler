@@ -1,4 +1,12 @@
 import GMaps from 'gmaps/gmaps.js';
+import blackMarkerPng from 'images/map-marker-black.png';
+import redMarkerPng from 'images/map-marker-red.png';
+// import clusterPinSvg from 'images/cluster-pin.svg';
+
+
+const blackMarker = 'http://' + window.location.host + blackMarkerPng;
+const redMarker = 'http://' + window.location.host + redMarkerPng;
+// const clusterPin = 'http://' + window.location.host + clusterPinSvg;
 
 const styles = [
     {
@@ -321,7 +329,7 @@ const styles = [
     }
 ]
 
-const loadMap = function() {
+const initPubsIndexMap = function() {
   const mapElement = document.getElementById('map');
   if (mapElement) { // don't try to build a map if there's no div#map to inject in
     const map = new GMaps({
@@ -350,19 +358,39 @@ const loadMap = function() {
       map.fitLatLngBounds(markers);
     }
 
-
-
-
     const cards = document.querySelectorAll('.card-row');
     cards.forEach((card, index) => {
       const marker = mapMarkers[index];
       card.addEventListener('mouseover', () => {
-        marker.setIcon('https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_blue.png');
+        marker.setIcon(redMarker);
       });
       card.addEventListener('mouseout', () => {
-        marker.setIcon('https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_red.png');
+        marker.setIcon(blackMarker);
       });
     })
+
+    // const clusterOptions = {
+    //   minimumClusterSize: 4,
+    //   cssClass: 'map-cluster',
+    //   styles: [
+    //     {
+    //       url: clusterPin,
+    //       height: 24,
+    //       width: 24,
+    //       backgroundPosition: 'center'
+    //     },
+    //     {
+    //       url: clusterPin,
+    //       height: 64,
+    //       width: 64,
+    //       backgroundPosition: 'center'
+    //     }
+    //   ]
+    // };
+    // const markerCluster = new MarkerClusterer(
+    //   map.map,
+    //   mapMarkers,
+    //   clusterOptions)
 
     map.addStyle({
       styles: styles,
@@ -370,6 +398,7 @@ const loadMap = function() {
     });
     map.setStyle('map_style');
   }
+
 }
 
-export { loadMap }
+export { initPubsIndexMap }

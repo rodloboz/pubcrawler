@@ -1,12 +1,14 @@
-<div class="results-container">
-  <% Pub.all.each do |pub| %>
-      <div class="col-xs-12 col-sm-6">
-        <%= render pub %>
+<div style="margin-top: 90px">
+  <div class="container">
+    <section id="section-one">
+      <h4>CRAWLS</h4>
+      <div class="row">
+        <% @crawls.each do |crawl| %>
+          <div class="col-xs-12 col-sm-4">
+            <%= render crawl %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </section>
+  </div>
 </div>
-
-<div
-  id="map"
-  class="search-map"
-></div>

@@ -13,6 +13,7 @@ class PubsController < ApplicationController
       {
         lat: pub.latitude,
         lng: pub.longitude,
+        icon: view_context.image_path("map-marker-black.png"),
         infoWindow: { content: render_to_string(partial: "/pubs/map_box", locals: { pub: pub }) }
       }
     end
