@@ -1,5 +1,6 @@
 class Pub < ApplicationRecord
   DISTRICTS = [
+    "Alcântara",
     "Alfama",
     "Avenida da Liberdade",
     "Avenidas Novas",
@@ -8,6 +9,7 @@ class Pub < ApplicationRecord
     "Belém",
     "Cais do Sodré",
     "Campo de Ourique",
+    "Castelo",
     "Chiado",
     "Mouraria",
     "Parque das Nações",

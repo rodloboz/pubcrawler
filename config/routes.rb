@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :pubs
   resources :crawls
   resources :favorite_pubs, only: [:create, :destroy]
+  resources :favorite_crawls, only: [:create, :destroy]
 end

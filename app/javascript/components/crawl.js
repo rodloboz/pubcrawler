@@ -1,7 +1,7 @@
 import Rails from 'rails-ujs';
 
-const toggleIcons = function() {
-  const icons = document.querySelectorAll('.pub .menu-content i')
+const toggleCrawlIcons = function() {
+  const icons = document.querySelectorAll('.crawl .menu-content i')
 
   const toggleIcon = function(icon) {
     icon.classList.toggle('far');
@@ -9,13 +9,13 @@ const toggleIcons = function() {
   }
 
   icons.forEach((icon) => {
-    const pub = icon.closest('.card-row')
-    const pubId = pub.id.split('-')[1]
+    const crawl = icon.closest('.card-row')
+    const crawlId = crawl.id.split('-')[1]
     icon.addEventListener('click', () => {
       if (icon.classList.contains('far')) {
-        fetch('/favorite_pubs', {
+        fetch('/favorite_crawls', {
           method: 'post',
-          body: JSON.stringify({pub_id: pubId}),
+          body: JSON.stringify({crawl_id: crawlId}),
           headers: {
             'Content-Type': 'application/json',
             'X-CSRF-Token': Rails.csrfToken()
@@ -28,11 +28,10 @@ const toggleIcons = function() {
               throw new Error('Something went wrong');
             }
           }
-
       } else if (icon.classList.contains('fas')) {
-        fetch(`/favorite_pubs/${pubId}`, {
+        fetch(`/favorite_crawls/${crawlId}`, {
           method: 'delete',
-          body: JSON.stringify({pub_id: pubId}),
+          body: JSON.stringify({crawl_id: crawlId}),
           headers: {
             'Content-Type': 'application/json',
             'X-CSRF-Token': Rails.csrfToken()
@@ -50,4 +49,4 @@ const toggleIcons = function() {
   })
 };
 
-export { toggleIcons };
+export { toggleCrawlIcons };

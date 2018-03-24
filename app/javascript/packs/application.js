@@ -7,16 +7,16 @@ import { toggleNavbarBackground } from '../components/navbar';
 import { initPubsIndexMap } from '../components/map';
 import ReallySmoothScroll from 'really-smooth-scroll';
 import { toggleIcons } from '../components/pub';
+import { toggleCrawlIcons } from '../components/crawl';
 import { reactToModalChange } from '../components/modals';
 import { loadMapbox } from '../components/mapbox';
 import Rails from 'rails-ujs';
-
-
 
 Rails.start();
 autocomplete();
 toggleNavbarBackground();
 toggleIcons();
+toggleCrawlIcons();
 reactToModalChange();
 
 const homePage = document.querySelector('.pages.home');

@@ -103,7 +103,7 @@ pubs = [
     district: "Cais do Sodré",
     description: "Made big news worldwide by chef Anthony Bourdain’s patronage, this bar has still maintained its local fan base and its charming fishing hut appeal! It’s full of hooks, lines, bait and nets, but it also does great drinks on the waterfront!",
     photo: "http://apis.infoportugal.info/cms-media/pois/final/135/JRN.BS.26729-135615.JPG"
-  }
+  },
 ]
 
 puts "Cleaning up database"
