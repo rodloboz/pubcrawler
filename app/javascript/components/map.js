@@ -333,6 +333,14 @@ const loadMap = function() {
     });
     const markers = JSON.parse(mapElement.dataset.markers);
     const mapMarkers = map.addMarkers(markers);
+
+    mapMarkers.forEach((marker, index) => {
+      marker.addListener('click', () => {
+        map.setCenter(markers[index]);
+        markers[index].infoWindow.open(map, marker);
+      })
+    });
+
     if (markers.length === 0) {
       map.setZoom(2);
     } else if (markers.length === 1) {
@@ -341,6 +349,9 @@ const loadMap = function() {
     } else {
       map.fitLatLngBounds(markers);
     }
+
+
+
 
     const cards = document.querySelectorAll('.card-row');
     cards.forEach((card, index) => {

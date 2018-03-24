@@ -8,10 +8,12 @@ import { loadMap } from '../components/map';
 import ReallySmoothScroll from 'really-smooth-scroll';
 import { toggleIcons } from '../components/pub';
 import { reactToModalChange } from '../components/modals';
+import { loadMapbox } from '../components/mapbox';
 import Rails from 'rails-ujs';
 
+
+
 Rails.start();
-loadMap();
 autocomplete();
 toggleNavbarBackground();
 toggleIcons();
@@ -24,5 +26,14 @@ if (homePage) {
   smoothScroll();
 }
 
+const pubsIndex = document.querySelector('.pubs.index');
+if (pubsIndex) {
+  loadMap();
+}
+
+const crawlsIndex = document.querySelector('.crawls.index');
+if (crawlsIndex) {
+  loadMapbox();
+}
 
 

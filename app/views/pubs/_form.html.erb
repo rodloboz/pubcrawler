@@ -3,7 +3,7 @@
       <div class="form-inputs">
         <%= f.input :name %>
         <%= f.input :address %>
-        <%= f.input :district %>
+        <%= f.input :district, collection: Pub::DISTRICTS %>
         <%= f.input :description %>
         <%= f.input :photo %>
       </div>

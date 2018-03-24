@@ -1,2 +1,12 @@
-<h1>Crawls#index</h1>
-<p>Find me in app/views/crawls/index.html.erb</p>
+<div class="results-container">
+  <% Pub.all.each do |pub| %>
+      <div class="col-xs-12 col-sm-6">
+        <%= render pub %>
+      </div>
+    <% end %>
+</div>
+
+<div
+  id="map"
+  class="search-map"
+></div>

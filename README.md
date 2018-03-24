@@ -14,6 +14,7 @@ Live demo here https://pubcrawlerapp.herokuapp.com/
 * [Deploying to Heroku](#deploying-to-heroku)
 * [Adding a Datepicker](#adding-a-datepicker)
 * [Adding Google Maps](#adding-google-maps)
+* [Adding Mapbox](#adding-mapbox)
 * [Adding a Favoriting System](#adding-a-favoriting-system)
 * [Setting up Devise for AJAX requests](#setting-up-devise-for-ajax-requests)
 
@@ -124,6 +125,55 @@ cards.forEach((card, index) => {
   });
 })
 ```
+
+To center map on clicked marker and open infoWindow:
+
+```javascript
+mapMarkers.forEach((marker, index) => {
+  marker.addListener('click', () => {
+    map.setCenter(markers[index]);
+    markers[index].infoWindow.open(map, marker);
+  })
+})
+```
+
+## Adding Mapbox
+
+```bash
+$ yarn add mapbox-gl
+```
+
+Invert stylesheets pack tags
+
+```javascript
+@import 'mapbox-gl/dist/mapbox-gl.css';
+```
+
+Add a basic map // MAPBOX_ACCESS_TOKEN API environment variable
+
+```javascript
+import mapboxgl from 'mapbox-gl';
+
+mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
+const start = [-9.1370, 38.7083];
+
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/dark-v9',
+  center: start,
+  bearing: 0,
+  zoom: 9,
+  attributionControl: false,
+  scrollZoom: false
+});
+```
+
+Add nagivation controls
+
+```javascript
+map.addControl(new mapboxgl.NavigationControl());
+``
+
 
 ## Adding a Favoriting System
 

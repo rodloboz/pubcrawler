@@ -1,6 +1,7 @@
 class CrawlsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_crawl, only: [:show, :edit, :update, :destroy]
+  layout "search", only: [:index]
 
   def index
     @crawls = policy_scope(Crawl)
@@ -20,6 +21,16 @@ class CrawlsController < ApplicationController
 
   def create
     @crawl = Crawl.new(crawl_params)
+    authorize @crawl
+    respond_to do |format|
+      if @crawl.save
+        format.html { redirect_to @crawl, notice: 'Pub was successfully created.' }
+        format.json { render :show, status: :created, location: @crawl }
+      else
+        format.html { render :new }
+        format.json { render json: @crawl.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def update
@@ -35,11 +46,11 @@ class CrawlsController < ApplicationController
   private
 
     def set_crawl
-      @crawl = crawl.find(params[:id])
+      @crawl = Crawl.find(params[:id])
       authorize @crawl
     end
 
     def crawl_params
-      params.require(:crawl).permit(:name, :description, :city)
+      params.require(:crawl).permit(:name, :description, :city, :start_date, :end_date)
     end
 end
