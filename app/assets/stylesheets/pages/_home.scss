@@ -7,6 +7,7 @@ body {
   // height: 100vh;
   font-family: $open-sans;
   background: #141414;
+  color: white;
 }
 
 * {
@@ -16,4 +17,8 @@ body {
 h4 {
   color: white;
   margin-bottom: 0;
+}
+
+.page-wrapper {
+  min-height: calc(100vh - 100px);
 }

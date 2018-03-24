@@ -15,11 +15,13 @@
             </a>
           </li>
           <li>
-            <%= icon(current_user.likes?(pub) ? "fas" : "far" , "heart") %>
+            <%= icon(current_user.likes_pub?(pub) ? "fas" : "far" , "heart") %>
+          </li>
           <li>
             <a href="#">
               <%= icon("far", "comment") %>
             </a>
+          </li>
         </ul>
       <% end %>
     </div>
@@ -28,7 +30,7 @@
         <span class="author"><%= pub.district %></span>
         <h1 class="title"><a href="#"><%= pub.name %></a></h1>
         <p class="text"><%= pub.description.truncate(105) if pub.description %></p>
-        <%= link_to "Read more", pub, class: "button", remote: true %>
+        <%= link_to "See more", pub, class: "button", remote: true %>
       </div>
     </div>
   </div>

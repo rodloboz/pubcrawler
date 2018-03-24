@@ -11,7 +11,9 @@
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
     <%= render 'shared/navbar' %>
-    <%= yield %>
+    <div class="page-wrapper">
+      <%= yield %>
+    </div>
     <%= render 'shared/footer' %>
     <%= render 'shared/modal' %>
     <%= javascript_pack_tag 'application' %>

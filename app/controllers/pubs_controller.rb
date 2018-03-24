@@ -12,8 +12,9 @@ class PubsController < ApplicationController
     @markers = @pubs.map do |pub|
       {
         lat: pub.latitude,
-        lng: pub.longitude
-        # infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
+        lng: pub.longitude,
+        icon: view_context.image_path("map-marker-black.png"),
+        infoWindow: { content: render_to_string(partial: "/pubs/map_box", locals: { pub: pub }) }
       }
     end
   end
@@ -45,6 +46,7 @@ class PubsController < ApplicationController
   # POST /pubs.json
   def create
     @pub = Pub.new(pub_params)
+    authorize @pub
 
     respond_to do |format|
       if @pub.save

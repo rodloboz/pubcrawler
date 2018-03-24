@@ -1,2 +1,14 @@
-<h1>Crawls#index</h1>
-<p>Find me in app/views/crawls/index.html.erb</p>
+<div style="margin-top: 90px">
+  <div class="container">
+    <section id="section-one">
+      <h4>CRAWLS</h4>
+      <div class="row">
+        <% @crawls.each do |crawl| %>
+          <div class="col-xs-12 col-sm-4">
+            <%= render crawl %>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  </div>
+</div>

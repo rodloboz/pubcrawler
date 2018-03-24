@@ -1,0 +1,38 @@
+<div id="crawl-<%= crawl.id %>" class="card-row">
+<div class="card">
+  <div class="wrapper" style="background: linear-gradient(to bottom,rgba(20,20,20, 0.8),rgba(76,76,76,0.2) 30%), url(<%= crawl.pubs.first.photo || "https://tvseriescritic.files.wordpress.com/2016/10/stranger-things-bicycle-lights-children.jpg" %>) center / cover no-repeat;">
+    <div class="header">
+      <div class="date">
+        <span class="day"><%= crawl.start_date.strftime("%d") %></span>
+        <span class="month"><%= crawl.start_date.strftime("%b") %></span>
+        <span class="year"><%= crawl.start_date.strftime("%Y") %></span>
+      </div>
+      <% if current_user %>
+        <ul class="menu-content">
+          <li>
+            <a href="#">
+              <%= icon("far", "bookmark") %>
+            </a>
+          </li>
+          <li>
+            <%= icon(current_user.likes_crawl?(crawl) ? "fas" : "far" , "heart") %>
+          </li>
+          <li>
+            <a href="#">
+              <%= icon("far", "comment") %>
+            </a>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+    <div class="data">
+      <div class="content">
+        <span class="author"><%= crawl.city %></span>
+        <h1 class="title"><a href="#"><%= crawl.name %></a></h1>
+        <p class="text"><%= crawl.description.truncate(105) if crawl.description %></p>
+        <%= link_to "See more", crawl, class: "button"%>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

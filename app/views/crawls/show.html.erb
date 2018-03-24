@@ -1,2 +1,16 @@
-<h1>Crawls#show</h1>
-<p>Find me in app/views/crawls/show.html.erb</p>
+<div class="results-container">
+  <h1><%= @crawl.name %></h1>
+  <p><%= @crawl.description %></p>
+  <hr>
+  <% @crawl.pubs.each do |pub| %>
+      <div class="col-xs-12 col-sm-6">
+        <%= render pub %>
+      </div>
+    <% end %>
+</div>
+
+<div
+  id="map"
+  class="search-map"
+  data-features="<%= @features.to_json %>"
+></div>
