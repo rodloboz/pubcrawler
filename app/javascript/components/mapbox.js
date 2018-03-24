@@ -3,6 +3,8 @@ import mapboxgl from 'mapbox-gl';
 const loadMapbox = function() {
   mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
   const start = [-9.1370, 38.7083];
+  const mapElement = document.getElementById('map');
+  const markers = JSON.parse(mapElement.dataset.markers);
 
   const map = new mapboxgl.Map({
     container: 'map',
