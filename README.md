@@ -90,6 +90,7 @@ One way to deal with this is to call your modules conditionally. First you set u
 ```ruby
 <body class="<%= controller_name %> <%= action_name %>">
   <%= yield %>
+</body>
 <% end >
 ```
 
@@ -100,9 +101,8 @@ import { activateNeonBannerText } from '../components/home';
 
 const homePage = document.querySelector('.pages.home');
 if (homePage) {
-  ReallySmoothScroll.shim();
   activateNeonBannerText();
-  smoothScroll();
+  ... // other modules/components
 }
 ```
 
@@ -216,6 +216,24 @@ mapMarkers.forEach((marker, index) => {
     markers[index].infoWindow.open(map, marker);
   })
 })
+```
+
+To use a custom marker from your assets pipeline, simple link the image file to the key `icon` in the controller action that builds the markers hash:
+
+```ruby
+def index
+
+  ...
+
+  @markers = @pubs.map do |pub|
+    {
+      lat: pub.latitude,
+      lng: pub.longitude,
+      icon: view_context.image_path("map-marker-black.png"),
+      infoWindow: { content: render_to_string(partial: "/pubs/map_box", locals: { pub: pub }) }
+    }
+  end
+end
 ```
 
 ## Adding Mapbox
