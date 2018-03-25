@@ -1,14 +1,15 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @pub.name %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @pub.address %>
-</p>
-
-<%= link_to 'Edit', edit_pub_path(@pub) %> |
-<%= link_to 'Back', pubs_path %>
+<div
+  id="map"
+  class="pub-map"
+  data-marker="<%= @marker.to_json %>"
+  ></div>
+<div class="overlay">
+  <h1><%= @pub.name %></h1>
+  <ul class="animations">
+    <li><a href="#" id="drop">Drop</a>
+    <li><a href="#" id="wobble">Wobble</a>
+    <li><a href="#" id="bounce">Bounce</a>
+  </ul>
+  <div class="list-label">from a <a href="https://codepen.io/dylanvann/pen/yNWdxJ" target="_blank">pen</a> by Dylan Vann</div>
+  <div class='tags'>CSS | Google Maps | <a href="http://dynamicsjs.com/">dynamics.js</a></div>
+</div>

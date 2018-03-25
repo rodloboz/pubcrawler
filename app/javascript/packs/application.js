@@ -4,7 +4,7 @@ import GMaps from 'gmaps/gmaps.js';
 import { autocomplete } from '../components/autocomplete';
 import { activateNeonBannerText, smoothScroll } from '../components/home';
 import { toggleNavbarBackground } from '../components/navbar';
-import { initPubsIndexMap } from '../components/map';
+import { initPubsIndexMap, initPubShowMap } from '../components/map';
 import ReallySmoothScroll from 'really-smooth-scroll';
 import { toggleIcons } from '../components/pub';
 import { toggleCrawlIcons } from '../components/crawl';
@@ -29,6 +29,11 @@ if (homePage) {
 const pubsIndexPage = document.querySelector('.pubs.index');
 if (pubsIndexPage) {
   initPubsIndexMap();
+}
+
+const pubShowPage = document.querySelector('.pubs.show');
+if (pubShowPage) {
+  initPubShowMap();
 }
 
 const crawlShowPage = document.querySelector('.crawls.show');

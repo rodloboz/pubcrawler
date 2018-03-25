@@ -22,6 +22,10 @@ class PubsController < ApplicationController
   # GET /pubs/1
   # GET /pubs/1.json
   def show
+    @marker = [
+      @pub.latitude,
+      @pub.longitude
+    ]
     respond_to do |format|
       format.js
       format.html

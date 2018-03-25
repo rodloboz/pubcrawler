@@ -2,332 +2,211 @@ import GMaps from 'gmaps/gmaps.js';
 import blackMarkerPng from 'images/map-marker-black.png';
 import redMarkerPng from 'images/map-marker-red.png';
 // import clusterPinSvg from 'images/cluster-pin.svg';
+// import CustomMarker from './marker';
+import styles from './styles';
+import dynamics from 'dynamics.js';
 
+CustomMarker.prototype = new google.maps.OverlayView();
+
+function CustomMarker(opts) {
+    this.setValues(opts);
+}
+
+CustomMarker.prototype.onAdd = function() {
+  var self = this;
+    var div = this.div;
+    if (!div) {
+        div = this.div = $('' +
+            '<div>' +
+            '<div class="shadow"></div>' +
+            '<div class="pulse"></div>' +
+            '<div class="pin-wrap">' +
+            '<div class="pin"></div>' +
+            '</div>' +
+            '</div>' +
+            '')[0];
+        this.pinWrap = this.div.getElementsByClassName('pin-wrap');
+        this.pin = this.div.getElementsByClassName('pin');
+        this.pinShadow = this.div.getElementsByClassName('shadow');
+        div.style.position = 'absolute';
+        div.style.cursor = 'pointer';
+        var panes = this.getPanes();
+        panes.overlayImage.appendChild(div);
+        this.animateDrop();
+        google.maps.event.addDomListener(div, "click", function(event) {
+            google.maps.event.trigger(self, "click", event);
+        });
+    }
+}
+
+CustomMarker.prototype.draw = function() {
+    var self = this;
+    var point = this.getProjection().fromLatLngToDivPixel(this.position);
+    var div = this.div;
+    if (point) {
+        div.style.left = point.x + 'px';
+        div.style.top = point.y + 'px';
+    }
+};
+
+CustomMarker.prototype.animateDrop = function() {
+    dynamics.stop(this.pinWrap);
+    dynamics.css(this.pinWrap, {
+        'transform': 'scaleY(2) translateY(-'+$('#map').outerHeight()+'px)',
+        'opacity': '1',
+    });
+    dynamics.animate(this.pinWrap, {
+        translateY: 0,
+        scaleY: 1.0,
+    }, {
+        type: dynamics.gravity,
+        duration: 1800,
+    });
+
+    dynamics.stop(this.pin);
+    dynamics.css(this.pin, {
+        'transform': 'none',
+    });
+    dynamics.animate(this.pin, {
+        scaleY: 0.8
+    }, {
+        type: dynamics.bounce,
+        duration: 1800,
+        bounciness: 600,
+    })
+
+    dynamics.stop(this.pinShadow);
+    dynamics.css(this.pinShadow, {
+        'transform': 'scale(0,0)',
+    });
+    dynamics.animate(this.pinShadow, {
+        scale: 1,
+    }, {
+        type: dynamics.gravity,
+        duration: 1800,
+    });
+}
+
+CustomMarker.prototype.animateBounce = function() {
+    dynamics.stop(this.pinWrap);
+    dynamics.css(this.pinWrap, {
+        'transform': 'none',
+    });
+    dynamics.animate(this.pinWrap, {
+        translateY: -30
+    }, {
+        type: dynamics.forceWithGravity,
+        bounciness: 0,
+        duration: 500,
+        delay: 150,
+    });
+
+    dynamics.stop(this.pin);
+    dynamics.css(this.pin, {
+        'transform': 'none',
+    });
+    dynamics.animate(this.pin, {
+        scaleY: 0.8
+    }, {
+        type: dynamics.bounce,
+        duration: 800,
+        bounciness: 0,
+    });
+    dynamics.animate(this.pin, {
+        scaleY: 0.8
+    }, {
+        type: dynamics.bounce,
+        duration: 800,
+        bounciness: 600,
+        delay: 650,
+    });
+
+    dynamics.stop(this.pinShadow);
+    dynamics.css(this.pinShadow, {
+        'transform': 'none',
+    });
+    dynamics.animate(this.pinShadow, {
+        scale: 0.6,
+    }, {
+        type: dynamics.forceWithGravity,
+        bounciness: 0,
+        duration: 500,
+        delay: 150,
+    });
+}
+
+CustomMarker.prototype.animateWobble = function() {
+    dynamics.stop(this.pinWrap);
+    dynamics.css(this.pinWrap, {
+        'transform': 'none',
+    });
+    dynamics.animate(this.pinWrap, {
+        rotateZ: -45,
+    }, {
+        type: dynamics.bounce,
+        duration: 1800,
+    });
+
+    dynamics.stop(this.pin);
+    dynamics.css(this.pin, {
+        'transform': 'none',
+    });
+    dynamics.animate(this.pin, {
+        scaleX: 0.8
+    }, {
+        type: dynamics.bounce,
+        duration: 800,
+        bounciness: 1800,
+    });
+}
 
 const blackMarker = window.location.origin + blackMarkerPng;
 const redMarker = window.location.origin + redMarkerPng;
 // const clusterPin = 'http://' + window.location.host + clusterPinSvg;
 
-const styles = [
-    {
-        "featureType": "landscape.man_made",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "hue": "#ff5b00"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.man_made",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "hue": "#ff5b00"
-            },
-            {
-                "lightness": "0"
-            },
-            {
-                "gamma": "1.33"
-            },
-            {
-                "saturation": "67"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.man_made",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "color": "#fbdbc9"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.natural",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#f18a51"
-            },
-            {
-                "saturation": "3"
-            },
-            {
-                "lightness": "75"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            },
-            {
-                "lightness": "-19"
-            },
-            {
-                "gamma": "1.00"
-            },
-            {
-                "saturation": "-10"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "hue": "#ff3800"
-            },
-            {
-                "saturation": "-74"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.attraction",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.business",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.government",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.medical",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.park",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.place_of_worship",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.school",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.sports_complex",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "hue": "#ff3800"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            },
-            {
-                "lightness": "-5"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            },
-            {
-                "lightness": "-19"
-            },
-            {
-                "saturation": "-10"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "hue": "#ff3800"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#fbdbc9"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "color": "#fbdbc9"
-            },
-            {
-                "gamma": "0.4"
-            },
-            {
-                "lightness": "27"
-            }
-        ]
-    },
-    {
-        "featureType": "transit.line",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            },
-            {
-                "lightness": "-6"
-            }
-        ]
-    },
-    {
-        "featureType": "transit.line",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            },
-            {
-                "saturation": "22"
-            },
-            {
-                "lightness": "-47"
-            },
-            {
-                "gamma": "1.72"
-            }
-        ]
-    },
-    {
-        "featureType": "transit.line",
-        "elementType": "labels.text.stroke",
-        "stylers": [
-            {
-                "visibility": "off"
-            },
-            {
-                "color": "#fdfdfd"
-            }
-        ]
-    },
-    {
-        "featureType": "transit.station",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            },
-            {
-                "saturation": "-10"
-            },
-            {
-                "lightness": "-19"
-            }
-        ]
-    },
-    {
-        "featureType": "transit.station",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "saturation": "-67"
-            },
-            {
-                "lightness": "0"
-            },
-            {
-                "gamma": "1"
-            },
-            {
-                "hue": "#ff3800"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            },
-            {
-                "lightness": "-11"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#fbd4c9"
-            }
-        ]
-    }
-]
+
+const initPubShowMap = function() {
+  const mapElement = document.getElementById('map');
+  const latlng = JSON.parse(mapElement.dataset.marker);
+  if (mapElement) {
+    const pos = new google.maps.LatLng(latlng[0], latlng[1]);
+    const map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 14,
+      center: pos,
+      disableDefaultUI: true,
+      styles: styles
+    });
+
+    const marker = new CustomMarker({
+          position: pos,
+          map: map,
+      });
+
+    const drop = document.getElementById('drop');
+    const wobble = document.getElementById('wobble');
+    const bounce = document.getElementById('bounce');
+
+    google.maps.event.addListener(marker, 'click', function(e) {
+        marker.animateWobble();
+    });
+
+    google.maps.event.addListener(marker, 'mouseover', function(e) {
+        marker.animateWobble();
+    });
+
+    drop.addEventListener('click', function(e) {
+        marker.animateDrop();
+    });
+
+    wobble.addEventListener('click', function(e) {
+        marker.animateWobble();
+    });
+
+    bounce.addEventListener('click', function(e) {
+        marker.animateBounce();
+    })
+  }
+}
 
 const initPubsIndexMap = function() {
   const mapElement = document.getElementById('map');
@@ -401,4 +280,4 @@ const initPubsIndexMap = function() {
 
 }
 
-export { initPubsIndexMap }
+export { initPubsIndexMap, initPubShowMap }

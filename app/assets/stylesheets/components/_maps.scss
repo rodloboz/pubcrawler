@@ -4,3 +4,173 @@
     color: black;
   }
 }
+
+.pub-map {
+  width: 100%;
+  height: calc(100vh - 140px) !important;
+  margin-top: 70px; right: 0;
+  position: absolute;
+  div {
+    outline: none;
+  }
+}
+
+// Thanks to: https://www.antimath.info/css/sass-sqrt-function/
+// Using sqrt to get the size of the map pin. You could do this manually,
+// if your pin is a different shape.
+@function sqrt($r) {
+    $x0: 1;
+    $x1: $x0;
+    @for $i from 1 through 10 {
+        $x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0);
+        $x0: $x1;
+    }
+    @return $x1;
+}
+$pinWidth: 100px;
+$pinHeightFactor: ((1 + sqrt(2))/2);
+$pinHeight: $pinHeightFactor * $pinWidth;
+$pinColor: #f93c11;
+$shadowOpacity: .5;
+$shadow-size: 50px;
+$pulseSize: 100px;
+.pin-wrap {
+    position: absolute;
+    width: $pinWidth;
+    height: $pinWidth;
+    margin-top: -$pinHeight;
+    margin-left: -$pinWidth/2;
+    transform-origin: 50% ($pinHeightFactor * 100%) 0;
+}
+.pin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: $pinWidth;
+    height: $pinWidth;
+    margin-top: -$pinWidth/2;
+    margin-left: -$pinWidth/2;
+    transform-origin: 50% ($pinHeightFactor * 100%) 0;
+}
+.pin::after {
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    width: $pinWidth;
+    height: $pinWidth;
+    content: '';
+    transform: rotateZ(-45deg);
+    border: 20px solid $pinColor;
+    border-radius: 50% 50% 50% 50%;
+}
+.pin::before {
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    width: $pinWidth;
+    height: $pinWidth;
+    content: '';
+    transform: rotateZ(-45deg);
+    border: 18px solid darken($pinColor, 10%);
+    border-radius: 50% 50% 50% 0;
+    ;
+}
+.shadow {
+    position: absolute;
+}
+.shadow::after {
+    position: absolute;
+    left: -100px - $shadow-size/2;
+    display: block;
+    width: $shadow-size;
+    height: $shadow-size;
+    margin-top: -$shadow-size/2;
+    content: '';
+    transform: rotateX(55deg);
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, $shadowOpacity) 100px 0 20px;
+}
+.pulse {
+    position: absolute;
+    margin-top: -$pulseSize/2;
+    margin-left: -$pulseSize/2;
+    transform: rotateX(55deg);
+}
+.pulse::after {
+    display: block;
+    width: $pulseSize;
+    height: $pulseSize;
+    content: '';
+    animation: pulsate 1s ease-out;
+    animation-delay: 1.1s;
+    animation-iteration-count: infinite;
+    opacity: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 1px 2px rgba(0, 0, 0, $shadowOpacity);
+    box-shadow: 0 0 6px 3px rgba($pinColor, 1.0);
+}
+@keyframes pulsate {
+    0% {
+        transform: scale(.1, .1);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.2, 1.2);
+        opacity: 0;
+    }
+}
+.overlay {
+  font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 2em;
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  color: $pinColor;
+  background: rgba(white, .75);
+  h1 {
+      font-family: Raleway, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+      font-weight: 900;
+      font-size: 32px;
+      margin-bottom: 10px;
+      border-bottom: 2px dashed $pinColor;
+      display: inline-block;
+  }
+}
+.tags {
+    font-weight: 300;
+}
+.list-label {
+    font-family: Raleway, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-weight: 400;
+}
+.overlay li {
+    display: inline-block;
+}
+.tags a{
+  color: $pinColor;
+}
+$buttonHeight: 44px;
+.animations a {
+    line-height: $buttonHeight - 2px;
+    display: block;
+    box-sizing: border-box;
+    height: $buttonHeight;
+    margin: 0 5px;
+    padding: 0 10px;
+    text-decoration: none;
+    color: $pinColor;
+    border: 2px solid $pinColor;
+    border-radius: ($buttonHeight / 2);
+    transition: background-color 0.3s, color 0.3s;
+}
+.animations a:hover {
+    color: white;
+    background: $pinColor;
+}
