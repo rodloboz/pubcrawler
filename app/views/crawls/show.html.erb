@@ -1,6 +1,7 @@
 <div class="results-container">
   <h1><%= @crawl.name %></h1>
   <p><%= @crawl.description %></p>
+  <button id="navigateBtn" class="btn btn-base btn-brand btn-xs">Navigate</button>
   <hr>
   <% @crawl.pubs.each do |pub| %>
       <div class="col-xs-12 col-sm-6">

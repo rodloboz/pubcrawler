@@ -23,11 +23,11 @@ const toggleCrawlIcons = function() {
           credentials: 'same-origin'
         }).then((response) => {
             if (response.ok) {
-              toggleIcon(icon))
+              toggleIcon(icon)
             } else {
               throw new Error('Something went wrong');
             }
-          }
+          });
       } else if (icon.classList.contains('fas')) {
         fetch(`/favorite_crawls/${crawlId}`, {
           method: 'delete',
@@ -39,11 +39,11 @@ const toggleCrawlIcons = function() {
           credentials: 'same-origin'
         }).then((response) => {
             if (response.ok) {
-              toggleIcon(icon))
+              toggleIcon(icon)
             } else {
               throw new Error('Something went wrong');
             }
-          }
+          });
       }
     })
   })

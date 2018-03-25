@@ -4,8 +4,8 @@ import redMarkerPng from 'images/map-marker-red.png';
 // import clusterPinSvg from 'images/cluster-pin.svg';
 
 
-const blackMarker = 'http://' + window.location.host + blackMarkerPng;
-const redMarker = 'http://' + window.location.host + redMarkerPng;
+const blackMarker = window.location.origin + blackMarkerPng;
+const redMarker = window.location.origin + redMarkerPng;
 // const clusterPin = 'http://' + window.location.host + clusterPinSvg;
 
 const styles = [

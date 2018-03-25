@@ -13,7 +13,7 @@ class CrawlsController < ApplicationController
           "id": "#{pub.id}",
           "properties": {
             "description":
-            "<div class=\"popup-bottom\">
+            "<div class=\"map-box\">
             <h4 class=\"bold\">#{pub.name}</h4>
             <h5 class=\"light\">#{pub.district}</h5>
             </div>"
