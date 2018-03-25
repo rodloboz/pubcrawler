@@ -155,6 +155,11 @@ const loadMapbox = function() {
 
       features.forEach(function (feature, index){
         const pub = document.getElementById('pub-' + feature.id);
+        pub.style.cursor = 'zoom-in';
+
+        pub.addEventListener('click', () => {
+          flyToFeature(features[index].geometry.coordinates)
+        });
 
         pub.addEventListener('mouseover', function (e) {
           map.flyTo({
