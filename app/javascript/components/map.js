@@ -3,8 +3,7 @@ import blackMarkerPng from 'images/map-marker-black.png';
 import redMarkerPng from 'images/map-marker-red.png';
 // import clusterPinSvg from 'images/cluster-pin.svg';
 import styles from './styles';
-import dynamics from 'dynamics.js';
-import CustomMarker from './marker';
+import { CustomMarker } from './marker';
 
 const blackMarker = window.location.origin + blackMarkerPng;
 const redMarker = window.location.origin + redMarkerPng;

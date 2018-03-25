@@ -11,6 +11,9 @@ Live demo here https://pubcrawlerapp.herokuapp.com/
 ## Table of Contents
 
 * [Getting started](#getting-started)
+* [Structuring the packs files](#structuring-the-packs-files)
+* [Webpack and the Asset Pipeline](#webpack-and-the-rails-asset-piepeline)
+* [Common patterns](#common-patterns)
 * [Deploying to Heroku](#deploying-to-heroku)
 * [Adding a Datepicker](#adding-a-datepicker)
 * [Adding Google Maps](#adding-google-maps)
@@ -35,6 +38,84 @@ GOOGLE_API_SERVER_KEY: AIz*********************************TUZ
 ```
 
 NOTE: Only `admin` users can create new instances of `Pub`.
+
+## Structuring the packs files
+
+The `app/javascript/packs/application.js`is webpack's javascript entry point. You should use it to require the components your application needs, both npm modules installed with `yarn` and your own local javascript components, which can go in their own folder in `app/javascript/components`.
+
+Some npm modules require your to import their own css in order to work property. You should set up `application.js` to import a css file from where all modules' stylesheets will be imported:
+
+```javascript
+import './application.css';
+```
+
+and let rails know you'll be importing CSS from in your javascript by adding this to your `application.html.erb` layout:
+
+```ruby
+<%= stylesheet_pack_tag 'application', media: 'all' %>
+```
+
+Finally, you can import vendor css from the packs `application.css`
+
+```css
+@import 'name-of-vendor-npm-module/vendor.css';
+```
+
+## Webpack and the Rails Asset Piperline
+
+If you need to access assets, such as images and other files, from the sprockets assets pipeline, you can configure webpack to look up files in that folder by adding the following to `webpacker.yml` config file under the *default:* key:
+
+```ruby
+resolved_paths: ['app/assets']
+```
+
+You can now import images from `app/assets/images` in a js file like this:
+
+```javascript
+import imageName from 'images/image.jpg';
+```
+
+imageName will now reference the relative path inside your app. If you need an absolute path you can do something like this:
+
+```javascript
+const myImage = window.location.origin + imageName;
+```
+
+## Common patterns
+
+When you import modules in `packs/application.js` they will run on every page of your app that's linked to webpack's entry point with `<%= javascript_pack_tag 'application' %>`. Something this is what you want, but often you want certain pieces of your javascript code to run only on specific pages.
+
+One way to deal with this is to call your modules conditionally. First you set up the `body` class in your layout file with two utility classes which will bear the current controller and action name:
+
+```ruby
+<body class="<%= controller_name %> <%= action_name %>">
+  <%= yield %>
+<% end >
+```
+
+Then you call your modules on the specific pages you want them to run. For example, I have a banner only displayed on my landing page and I want to transform some banner text content with javascript:
+
+```javascript
+import { activateNeonBannerText } from '../components/home';
+
+const homePage = document.querySelector('.pages.home');
+if (homePage) {
+  ReallySmoothScroll.shim();
+  activateNeonBannerText();
+  smoothScroll();
+}
+```
+
+Another strategy is to put javascript that relies on the existence of a specific element inside an if block:
+
+```javascript
+const initMap = function() {
+  const mapElement = document.getElementById('map');
+  if (mapElement) {
+    ... // only do something if #map element exists
+  }
+}
+```
 
 ## Deploying to heroku
 
