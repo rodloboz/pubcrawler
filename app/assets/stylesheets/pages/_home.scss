@@ -21,4 +21,6 @@ h4 {
 
 .page-wrapper {
   min-height: calc(100vh - 100px);
+  // height: 100%;
+  overflow: auto;
 }

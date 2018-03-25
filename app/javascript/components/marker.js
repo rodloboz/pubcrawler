@@ -1,13 +1,15 @@
 import dynamics from 'dynamics.js';
 
-CustomMarker.prototype = new google.maps.OverlayView();
-
-function CustomMarker(opts) {
-    this.setValues(opts);
+export default class CustomMarker {
+  constructor(options) {
+    this.setValues(options)
+  }
 }
 
-CustomMarker.prototype.draw = function() {
-    var self = this;
+CustomMarker.prototype = new google.maps.OverlayView();
+
+CustomMarker.prototype.onAdd = function() {
+  var self = this;
     var div = this.div;
     if (!div) {
         div = this.div = $('' +
@@ -26,11 +28,17 @@ CustomMarker.prototype.draw = function() {
         div.style.cursor = 'pointer';
         var panes = this.getPanes();
         panes.overlayImage.appendChild(div);
+        this.animateDrop();
         google.maps.event.addDomListener(div, "click", function(event) {
             google.maps.event.trigger(self, "click", event);
         });
     }
+}
+
+CustomMarker.prototype.draw = function() {
+    var self = this;
     var point = this.getProjection().fromLatLngToDivPixel(this.position);
+    var div = this.div;
     if (point) {
         div.style.left = point.x + 'px';
         div.style.top = point.y + 'px';
