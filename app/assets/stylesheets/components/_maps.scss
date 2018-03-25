@@ -149,6 +149,13 @@ $pulseSize: 100px;
 .list-label {
     font-family: Raleway, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
     font-weight: 400;
+    a {
+      color: $pinColor;
+      text-decoration: underline !important;
+      &:hover {
+        color: $pinColor;
+      }
+    }
 }
 .overlay li {
     display: inline-block;
