@@ -136,7 +136,7 @@ My personal preference goes for [flatpicker](https://flatpickr.js.org). It is ve
 Setting up is simple:
 
 ```bash
-$ yarn add flackpicker
+$ yarn add flatpicker
 ```
 
 Then in the pack file responsible for importing css, in this case `app/javascript/packs/application.css`
