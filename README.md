@@ -91,7 +91,6 @@ One way to deal with this is to call your modules conditionally. First you set u
 <body class="<%= controller_name %> <%= action_name %>">
   <%= yield %>
 </body>
-<% end >
 ```
 
 Then you call your modules on the specific pages you want them to run. For example, I have a banner only displayed on my landing page and I want to transform some banner text content with javascript:
@@ -131,12 +130,12 @@ $ heroku buildpacks:add heroku/ruby
 
 There are many datepickers available, but many students end up trying to implement datepicker gems with outdated documentation or which require jQuery.
 
-My personal preference goes for [flatpicker](https://flatpickr.js.org). It is very light, highly customizable, includes a timepicker and does not require students to add moment.js
+My personal preference goes for [flatpickr](https://flatpickr.js.org). It is very light, highly customizable, includes a timepicker and does not require students to add moment.js
 
 Setting up is simple:
 
 ```bash
-$ yarn add flatpicker
+$ yarn add flatpickr
 ```
 
 Then in the pack file responsible for importing css, in this case `app/javascript/packs/application.css`
