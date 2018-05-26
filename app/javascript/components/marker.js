@@ -1,6 +1,6 @@
 import dynamics from 'dynamics.js';
 
-export default class CustomMarker {
+export class CustomMarker {
   constructor(options) {
     this.setValues(options)
   }
