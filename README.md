@@ -31,10 +31,17 @@ $ rails db:create db:migrate db:seed
 
 The seeds include addresses that will be geocoded. In order to take advantage of all of the features, make sure that all of the addresses were properly geocoded.
 
-You can use an API key for [Google's Maps Geocoding API](https://console.developers.google.com)
+You can use API keys for [Google's Maps Geocoding API and Javascript API](https://console.developers.google.com)
 
 ```ruby
 GOOGLE_API_SERVER_KEY: AIz*********************************TUZ
+GOOGLE_API_BROWSER_KEY: AIz*********************************1_c
+```
+
+If you get the error `can't find executable webpack for gem webpacker (Gem::Exception)` when webpacker is compilling run (overwrite all files when asked)
+
+```bash
+$ bundle exec rails webpacker:binstubs
 ```
 
 NOTE: Only `admin` users can create new instances of `Pub`.
