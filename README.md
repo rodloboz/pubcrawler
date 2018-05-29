@@ -1,12 +1,13 @@
-# pubcrawlers mock app
+# Pubcrawler mock app
 
 Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
 
-This app is intended to showcase the implementation of some of the most common features used by Le Wagon students in their projects using webpacker and ES6 syntax as opposed to jQuery and the Asset Pipeline as recommended by the course curriculum.
+This app is intended to show the implementation of some of the most common features that Le Wagon students usually user in their projects using webpacker and ES6 syntax instead of jQuery and the Asset Pipeline, as recommended by the most recent curriculum update.
 
-It is not meant to be the end-all implementation solution for these features, but merely to be used as a reference tool, namely by the Le Wagon Lisbon teaching staff and alumni.
+It is not meant to be the end-all implementation solution for these features – that would be impossible –, but simply to be used as a reference tool, namely by the Le Wagon teaching staff and alumni.
 
 Live demo here https://pubcrawlerapp.herokuapp.com/
+
 
 ## Table of Contents
 
@@ -29,7 +30,7 @@ After cloning the app, create the db, run the migrations and seed.
 $ rails db:create db:migrate db:seed
 ```
 
-The seeds include addresses that will be geocoded. In order to take advantage of all of the features, make sure that all of the addresses were properly geocoded.
+The seeds include addresses that will be geocoded. In order to take advantage of all the features, make sure that all of the addresses were properly geocoded.
 
 You can use API keys for [Google's Maps Geocoding API and Javascript API](https://console.developers.google.com)
 
@@ -48,15 +49,15 @@ NOTE: Only `admin` users can create new instances of `Pub`.
 
 ## Structuring the packs files
 
-The `app/javascript/packs/application.js`is webpack's javascript entry point. You should use it to require the components your application needs, both npm modules installed with `yarn` and your own local javascript components, which can go in their own folder in `app/javascript/components`.
+The `app/javascript/packs/application.js` is webpack's javascript entry point. You should use it to require the components your application needs, both npm modules installed with `yarn` and your own local javascript components, which should go in their own folder, such as in `app/javascript/components`.
 
-Some npm modules require your to import their own css in order to work property. You should set up `application.js` to import a css file from where all modules' stylesheets will be imported:
+Some npm modules require you to import their own css in order to work properly. You can set up `application.js` to import a css file from where all modules' stylesheets will be imported:
 
 ```javascript
 import './application.css';
 ```
 
-and let rails know you'll be importing CSS from in your javascript by adding this to your `application.html.erb` layout:
+and let rails know you'll be importing CSS from inside your webpack javascript by adding this to your `application.html.erb` layout:
 
 ```ruby
 <%= stylesheet_pack_tag 'application', media: 'all' %>
@@ -76,7 +77,7 @@ If you need to access assets, such as images and other files, from the sprockets
 resolved_paths: ['app/assets']
 ```
 
-You can now import images from `app/assets/images` in a js file like this:
+You can now import images from `app/assets/images` directly in a js file like this:
 
 ```javascript
 import imageName from 'images/image.jpg';
@@ -90,17 +91,17 @@ const myImage = window.location.origin + imageName;
 
 ## Common patterns
 
-When you import modules in `packs/application.js` they will run on every page of your app that's linked to webpack's entry point with `<%= javascript_pack_tag 'application' %>`. Something this is what you want, but often you want certain pieces of your javascript code to run only on specific pages.
+When you import modules in `packs/application.js` they run on every page of your app that's linked to webpack's entry point with `<%= javascript_pack_tag 'application' %>`. Sometimes this is the behaviour you want, but often you want certain pieces of your javascript code to run only on specific pages.
 
-One way to deal with this is to call your modules conditionally. First you set up the `body` class in your layout file with two utility classes which will bear the current controller and action name:
+One way to deal with this is to call your modules conditionally. First you set up the `body` class in your layout file with two utility classes which will bear the current active controller and action name:
 
-```ruby
+```html
 <body class="<%= controller_name %> <%= action_name %>">
   <%= yield %>
 </body>
 ```
 
-Then you call your modules on the specific pages you want them to run. For example, I have a banner only displayed on my landing page and I want to transform some banner text content with javascript:
+Then you call your modules on the specific pages you want them to run. For example, I have a banner that's only displayed on my landing page and I want to use a custom js function to transform some banner text content:
 
 ```javascript
 import { activateNeonBannerText } from '../components/home';
@@ -159,25 +160,25 @@ In this example I'm using a startDate input and an endDate input and the minimum
 import flatpickr from 'flatpickr';
 
 const startDateinput = document.getElementById('crawl_start_date');
-  const endDateinput = document.getElementById('crawl_end_date');
+const endDateinput = document.getElementById('crawl_end_date');
 
-  if (startDateinput && endDateinput) {
-    flatpickr(startDateinput, {
-    minDate: 'today',
-    dateFormat: 'd-m-Y',
-    onChange: function(_, selectedDate) {
-      if (selectedDate === '') {
-        return endDateinput.disabled = true;
-      }
-      endDateCalendar.set('minDate', selectedDate);
-      endDateinput.disabled = false;
+if (startDateinput && endDateinput) {
+  flatpickr(startDateinput, {
+  minDate: 'today',
+  dateFormat: 'd-m-Y',
+  onChange: function(_, selectedDate) {
+    if (selectedDate === '') {
+      return endDateinput.disabled = true;
     }
-  });
-    const endDateCalendar =
-      flatpickr(endDateinput, {
-        dateFormat: 'd-m-Y',
-      });
+    endDateCalendar.set('minDate', selectedDate);
+    endDateinput.disabled = false;
   }
+});
+  const endDateCalendar =
+    flatpickr(endDateinput, {
+      dateFormat: 'd-m-Y',
+    });
+}
 ```
 
 ## Adding Google Maps
@@ -186,7 +187,7 @@ For the basic setup I recommend following Le Wagon's [geocoding lecture](https:/
 
 However, unlike the lecture setup, *map.js* is a component and should go in the `app/javacript/components/` folder.
 
-You can pass several options when creating the map, such as to disable `streetViewControl`, `mapTypeControl`and `scrollwheel`:
+You can pass several options when creating the map, such as to disable `streetViewControl`, `mapTypeControl` and `scrollwheel`:
 
 ```javascript
 const map = new GMaps({
@@ -246,7 +247,7 @@ end
 
 ### Setting up the backend
 
-In order to add dynamic markers, mapbox need to receive an array of features. Here's an example of how we can set this up in our controller:
+In order to add dynamic markers, mapbox needs to receive an array of features. Here's an example of how we can set this up in our controller:
 
 ```ruby
 @features = @crawl.pubs.map do |pub|
@@ -293,7 +294,7 @@ Import Mapbox GL css in `app/javascripts/packs/application.css`
 
 Because we are styling the map element in the asset pipeline, we need to ensure that we import the asset stylesheets after the packs stylesheet. Otherwise, the mapbox-gl.css will prevail over our custom css styling.
 
-```ruby
+```html
 <%= stylesheet_pack_tag 'application', media: 'all' %>
 <%= stylesheet_link_tag 'application', media: 'all' %>
 ```
@@ -305,7 +306,7 @@ MAPBOX_ACCESS_TOKEN: pk.********************************************************
 ```
 In our component js file, we import the library, get the ENV variable token and define a starting position for the map [lgn, lat].
 
-Then we initiate the map with an hash of options, including the required style and disabling scrollZoom.
+Then we initiate the map with a hash of options, including the required style and disabling scrollZoom.
 
 ```javascript
 import mapboxgl from 'mapbox-gl';
@@ -353,7 +354,7 @@ function addMarkers(map) {
 }
 ```
 
-Then we parse the data attributes and call our function when the map loads. We also import an image stored in the Asset Pipiline to display as a marker:
+Then we parse the data attributes and call our function when the map loads. We also import an image stored in the Asset Pipiline to be displayed as a marker:
 
 ```javascript
 const features = JSON.parse(mapElement.dataset.features);
@@ -368,7 +369,7 @@ map.on('load', function() {
 }
 ```
 
-Finally we fit the map bounds to ours markers and fly in:
+Finally we fit the map bounds to our markers and fly in:
 
 ```javascript
 const bounds = new mapboxgl.LngLatBounds();
@@ -384,7 +385,7 @@ map.fitBounds(bounds, {
 
 ## Adding a Favoriting System
 
-A `user`can like/favorite another `model`. The simplest case is when the user is only allowed to like/favorite instances from a single model, in which case this can be represented by a `Favorite` class which will reference a user and the liked model.
+A `user` can like/favorite another `model`. The simplest case is when the user is only allowed to like/favorite instances from a single model, in which case this can be represented by a `Favorite` class which will reference a user and the liked model.
 
 In this app I have implement a solution that allows for the future implementation of more models that can be liked/favorited by using a single polymorphic `favorites` table:
 
@@ -392,7 +393,7 @@ In this app I have implement a solution that allows for the future implementatio
 $ rails generate model favorite user:references favorited:references{polymorphic}
 ```
 
-This creates the follwing migration:
+This creates the following migration:
 
 ```ruby
 class CreateFavorites < ActiveRecord::Migration
@@ -429,7 +430,7 @@ class User < ApplicationRecord
 end
 ```
 
-I've also added an instance method `likes?(pub)` that receives a pub object and returns `true`if the user has liked that pub and `false` otherwise.
+I've also added an instance method `likes?(pub)` that receives a pub object and returns `true` if the user has liked that pub and `false` otherwise.
 
 I created a completely separate resource called `favorite_pubs`, but it is also possible to go with a more generic `favorites` controller. The routes will only provide for two actions: `create` and `destroy`.
 
@@ -500,12 +501,12 @@ const toggleIcons = function() {
   })
 };
 
-export { toggleIcons };
+export { toggleIcons };
 ```
 
 And finally setup the server side generated frontend with the logic to determine which class should be applied on the first page load:
 
-```erb
+```html
 <li>
   <%= icon(current_user.likes?(pub) ? "fas" : "far" , "heart") %>
 <li>
