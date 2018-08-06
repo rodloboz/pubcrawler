@@ -142,6 +142,8 @@ My personal preference goes for [flatpickr](https://flatpickr.js.org). It is ver
 
 Setting up is simple:
 
+*NOTE* If you're using simple_form, your date input(s) must be set to `as: :string`
+
 ```bash
 $ yarn add flatpickr
 ```
